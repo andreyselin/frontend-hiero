@@ -1,0 +1,49 @@
+{
+  "contexts": [
+    {
+      "name": "default",
+      "position": {
+        "left": 0,
+        "top": 0
+      },
+      "blocks": [
+        {
+          "name": "sourceBlockExample",
+          "top": 170,
+          "left": 148,
+          "width": 361,
+          "height": 64
+        },
+        {
+          "name": "targetBlockExample",
+          "top": 197,
+          "left": 587,
+          "width": 532,
+          "height": 64
+        }
+      ],
+      "connections": [
+        {
+          "from": {
+            "block": 0,
+            "line": 2
+          },
+          "to": {
+            "block": 1
+          }
+        }
+      ],
+      "contents": {}
+    }
+  ],
+  "blocks": [
+    {
+      "name": "sourceBlockExample",
+      "filename": "aphs-usage-example.js"
+    },
+    {
+      "name": "targetBlockExample",
+      "filename": "aphs-usage-example.js"
+    }
+  ]
+}
