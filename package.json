@@ -1,20 +1,18 @@
 {
   "name": "hieroglyphs",
-  "version": "0.0.1",
-  "description": "The new information",
-  "main": "index.js",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "aphs": "0.0.5",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-scripts": "1.0.14"
+  },
   "scripts": {
     "aphs": "node node_modules/aphs/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "graph",
-    "blockscheme",
-    "mindmap"
-  ],
-  "devDependencies": {
-    "aphs": "0.0.5"
-  },
-  "author": "Andrey Selin",
-  "license": "MIT"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
 }
