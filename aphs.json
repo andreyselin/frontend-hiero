@@ -1,1 +1,28 @@
-{"contexts":[{"name":"default","position":{"left":0,"top":0},"blocks":[],"connections":[],"contents":{}}],"blocks":[{"name":"sourceBlockExample","filename":"aphs-usage-example.js"},{"name":"targetBlockExample","filename":"aphs-usage-example.js"}]}
+{
+  "contexts": [
+    {
+      "name": "default",
+      "position": {
+        "left": 0,
+        "top": 0
+      },
+      "blocks": [
+        {
+          "name": "app",
+          "width": 285,
+          "height": 128,
+          "left": 200,
+          "top": 200
+        }
+      ],
+      "connections": [],
+      "contents": {}
+    }
+  ],
+  "blocks": [
+    {
+      "name": "app",
+      "filename": "App.js"
+    }
+  ]
+}

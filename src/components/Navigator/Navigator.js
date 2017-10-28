@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.css';
+import './Navigator.css';
 import Context from '../Context';
 
 class Navigator extends React.Component {

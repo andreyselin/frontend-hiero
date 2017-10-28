@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Navigator from './components/Navigator';
-import logo from './logo.svg';
 import './App.css';
 
+/*-app-*/
 class App extends Component {
   render() {
     return (
@@ -10,5 +10,6 @@ class App extends Component {
     );
   }
 }
+/*-/app-*/
 
 export default App;
