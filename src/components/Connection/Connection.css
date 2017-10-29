@@ -1,0 +1,6 @@
+.Connection {
+    position: absolute;
+    border-top: 5px solid #8cc4cc;
+    margin-top: -2.5px;
+    z-index: var(--z-connection);
+}

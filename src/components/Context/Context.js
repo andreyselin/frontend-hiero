@@ -1,23 +1,20 @@
 import React from 'react';
 import Glyph from '../Glyph';
+import Connection from '../Connection';
+import "./Context.css";
 
 
 
 var whatServerWillReturn = {
     glyphs: {
-        "a402fe": {     w: 50,     h: 50,     l: 300,     t: 200     },
-        "01b3c9": {     w: 40,     h: 40,     l: 400,     t: 300     },
-        "04a2c9": {     w: 30,     h: 30,     l: 500,     t: 400     }
+        "a402fe": {     link:"a402fe",     w: 50,     h: 50,     l: 64,     t: 64      },
+        "04a2c9": {     link:"04a2c9",     w: 30,     h: 30,     l: 128,    t: 128     }
     },
     connections: [
         {
-            link: "a9f23",
-            from: "a402fe",
-            to:   "01b3c9"
-        },{
             link: "1a372",
-            from: "a402fe",
-            to:   "04a2c9"
+            fromLink: "a402fe",
+            toLink:   "04a2c9"
         }
     ]
 };
@@ -31,6 +28,14 @@ function prepareContext(theContext) {
         theGlyph.mt = -1 * (theGlyph.h/2);
         theGlyph.ml = -1 * (theGlyph.w/2);
     });
+
+
+    theContext.connections.forEach(connection=>{
+        connection.from = theContext.glyphs[connection.fromLink];
+        connection.to   = theContext.glyphs[connection.toLink];
+    });
+
+
     return theContext;
 }
 
@@ -48,6 +53,9 @@ class Context extends React.Component {
             <div className="Context">
                 {Object.keys(this.state.glyphs).map((glyphKey, index)=>
                     <Glyph key={index} info={this.state.glyphs[glyphKey]} />
+                )}
+                {this.state.connections.map((connection, index)=>
+                    <Connection key={index} info={connection} />
                 )}
             </div>
         )

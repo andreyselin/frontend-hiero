@@ -4,17 +4,18 @@ import './Glyph.css';
 class Glyph extends React.Component {
     constructor (props) {
         super(props);
+        this.state = this.props.info;
     }
     render () {
         return (
             <div className="Glyph"
                  style={{
-                    width:      this.props.info.w,
-                    height:     this.props.info.h,
-                    top:        this.props.info.t,
-                    left:       this.props.info.l,
-                    marginTop:  this.props.info.mt,
-                    marginLeft: this.props.info.ml
+                    width:      this.state.w,
+                    height:     this.state.h,
+                    top:        this.state.t,
+                    left:       this.state.l,
+                    marginTop:  this.state.mt,
+                    marginLeft: this.state.ml
                  }}
                 >
             </div>
