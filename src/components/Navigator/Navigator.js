@@ -3,9 +3,7 @@ import './Navigator.css';
 import Context from '../Context';
 
 class Navigator extends React.Component {
-    constructor () {
-        super();
-    }
+
     render () {
         return (
             <div className="Navigator">
