@@ -3,47 +3,31 @@ import "./Connection.css";
 
 class Connection extends React.Component {
 
-
-
-
-
     constructor (props) {
         super(props);
-        this.state = {
-            hypotenuse: 0,
-            angle: 0,
-            top: 0,
-            left:0,
-            ...this.props.info
-        };
-        this.drawConnection = this.drawConnection.bind(this);
+        this.state = this.props.info;
     }
-
-
-
 
 
     componentDidMount () {
-        this.setState(this.drawConnection(this.state));
+        //this.setState(this.drawConnection(this.state));
     }
-
-
-
 
 
     // Calculates position, angle
     // and length of connection line
     drawConnection (state) {
 
-        var fromX = state.from.l;
-        var fromY = state.from.t;
-        var toX   = state.to.l;
-        var toY   = state.to.t;
+        let fromX = state.from.l,
+            fromY = state.from.t,
+            toX   = state.to.l,
+            toY   = state.to.t;
 
-        var catheterX, catheterY = 0;
-        var sideA, sideB, sideC = 0;
-        var heightOfTriangle;
-        var offsetToLeft;
+        let catheterX, catheterY = 0,
+            sideA, sideB, sideC = 0,
+            heightOfTriangle,
+            offsetToLeft;
+
         catheterX = fromX - toX;
         catheterY = fromY - toY;
 
@@ -71,12 +55,13 @@ class Connection extends React.Component {
     }
 
 
-
-
-
-
     render () {
+
+        this.drawConnection (this.state);
+
         //console.log("this.state", this.state);
+        //console.log("this.props", this.props.info);
+
         return (
             <div
                 className="Connection"
@@ -87,11 +72,8 @@ class Connection extends React.Component {
                         transform: `rotateZ(${this.state.angle}deg)`
                     }}
                 ></div>
-        )
+        );
     }
-
-
-
 
 
 }

@@ -5,7 +5,7 @@ class Glyph extends React.Component {
     constructor (props) {
         super(props);
         this.state = this.props.info;
-        this.state.onMouseUp = null;
+        //this.state.onMouseUp = null;
         this.onMouseDown = this.onMouseDown.bind(this);
     }
 
@@ -27,8 +27,8 @@ class Glyph extends React.Component {
                  onMouseDown = {this.onMouseDown}
                  onMouseUp = {this.state.onMouseUp}
                 >
-                <img src="../../img/test.jpg" />
-                <span>Подпись</span>
+                <img src="http://www2.b2bcg.ru/upload/iblock/a73/a73753d3ab8de6e5f9a3291798cc08e8.jpg" alt="BELKA HERE" />
+                <span>Alex Under</span>
             </div>
         )
     }

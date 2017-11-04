@@ -1,34 +1,39 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Glyph from '../Glyph';
 import Connection from '../Connection';
 import "./Context.css";
 import {connect} from 'react-redux';
+import {moveBlocks} from '../../actions/moveblocks';
+import {createBlock} from '../../actions/createblock';
+import {bindActionCreators} from 'redux';
 
 
 function mapStateToProps(state) {
     return {
         glyphs: state.glyphs,
         connections: state.connections,
-
     }
 }
 
-class Context extends React.Component {
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({moveBlocks: moveBlocks, createBlock: createBlock}, dispatch);
+}
+
+class Context extends Component {
     constructor (props) {
         super(props);
-        this.state = this.props;
-       // this.state.onMouseMove = null;
-       // this.state.onMouseDown = null;
+        this.state = {};
         this.moveBlock = this.moveBlock.bind(this);
 
     }
 
     moveBlock(block) {
-        var that = this;
+        let that = this;
         block.setState({onMouseUp: function() {
-                                 that.setState({onMouseMove: null});
-                                 block.setState({onMouseUp: null});
-                        }});
+                                    that.setState({onMouseMove: null});
+                                    block.setState({onMouseUp: null});
+                                    that.props.moveBlocks(block);
+                                    }});
         that.setState({onMouseMove: function(e) {
                                         block.setState({t: e.clientY, l: e.clientX });
                                         }});
@@ -38,15 +43,16 @@ class Context extends React.Component {
     render () {
         return (
             <div className="Context" onMouseMove={this.state.onMouseMove}>
-                {Object.keys(this.state.glyphs).map((glyphKey, index)=>
-                    <Glyph key={index} info={this.state.glyphs[glyphKey]} moveBlock={this.moveBlock} />
+                <button onClick={this.props.createBlock}> Create </button>
+                {Object.keys(this.props.glyphs).map((glyphKey, index)=>
+                    <Glyph key={index} info={this.props.glyphs[glyphKey]} moveBlock={this.moveBlock} />
                 )}
-                {this.state.connections.map((connection, index)=>
-                    <Connection key={index} info={connection} />
+                {this.props.connections.map((connection, index)=>
+                    <Connection key={index} info={connection}/>
                 )}
             </div>
         )
     }
 }
 
-export default connect(mapStateToProps)(Context);
+export default connect(mapStateToProps, matchDispatchToProps)(Context);
