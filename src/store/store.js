@@ -26,12 +26,6 @@ function prepareContext(theContext) {
         theGlyph.ml = -1 * (theGlyph.w/2);
     });
 
-
-    theContext.connections.forEach(connection=>{
-        connection.from = theContext.glyphs[connection.fromLink];
-        connection.to   = theContext.glyphs[connection.toLink];
-    });
-
     return theContext;
 }
 
@@ -46,8 +40,6 @@ function createGlyphsAndConnections(state = fromAPI, action) {
         action.payload.data.mt = -1 * action.payload.data.h/2;
         action.payload.data.ml = -1 * action.payload.data.w/2;
 
-        //console.log(state);
-
         return {
             ...state,
             glyphs: {...state.glyphs, [action.payload['name']]:action.payload['data'] }
@@ -57,15 +49,6 @@ function createGlyphsAndConnections(state = fromAPI, action) {
     if (action.type === 'EDIT_BLOCK') {
         let data = action.payload.data;
         state.glyphs[data.link] = data;
-
-        //console.log(state);
-
-        state.connections.forEach(connection=>{
-            connection.from = state.glyphs[connection.fromLink];
-            connection.to   = state.glyphs[connection.toLink];
-        });
-
-        //console.log(state);
 
         return state;
     }

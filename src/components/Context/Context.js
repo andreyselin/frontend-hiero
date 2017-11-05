@@ -29,6 +29,7 @@ class Context extends Component {
 
     moveBlock(block) {
         let that = this;
+
         block.setState({onMouseUp: function() {
                                     that.setState({onMouseMove: null});
                                     block.setState({onMouseUp: null});
@@ -48,7 +49,9 @@ class Context extends Component {
                     <Glyph key={index} info={this.props.glyphs[glyphKey]} moveBlock={this.moveBlock} />
                 )}
                 {this.props.connections.map((connection, index)=>
-                    <Connection key={index} info={connection}/>
+                    <Connection key={index} from={this.props.glyphs[connection.fromLink]}
+                                            to={this.props.glyphs[connection.toLink]}/>
+
                 )}
             </div>
         )

@@ -5,7 +5,6 @@ class Glyph extends React.Component {
     constructor (props) {
         super(props);
         this.state = this.props.info;
-        //this.state.onMouseUp = null;
         this.onMouseDown = this.onMouseDown.bind(this);
     }
 

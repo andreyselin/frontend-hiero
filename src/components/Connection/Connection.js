@@ -5,73 +5,53 @@ class Connection extends React.Component {
 
     constructor (props) {
         super(props);
-        this.state = this.props.info;
+        this.state = {};
     }
-
-
-    componentDidMount () {
-        //this.setState(this.drawConnection(this.state));
-    }
-
 
     // Calculates position, angle
     // and length of connection line
-    drawConnection (state) {
+    drawConnection (from, to) {
 
-        let fromX = state.from.l,
-            fromY = state.from.t,
-            toX   = state.to.l,
-            toY   = state.to.t;
+        let fromX = from.l,
+            fromY = from.t,
+            toX   = to.l,
+            toY   = to.t;
 
-        let catheterX, catheterY = 0,
-            sideA, sideB, sideC = 0,
-            heightOfTriangle,
-            offsetToLeft;
-
-        catheterX = fromX - toX;
-        catheterY = fromY - toY;
-
-        state.hypotenuse = Math.sqrt(catheterX*catheterX + catheterY*catheterY);
-
-        state.angle = catheterX >= 0 ?
+        let heightOfTriangle = 0,
+            offsetToLeft = 0;
+        let catheterX = fromX - toX;
+        let catheterY = fromY - toY;
+        let hypotenuse = Math.sqrt(catheterX*catheterX + catheterY*catheterY);
+        let angle = catheterX >= 0 ?
             Math.atan(1/(catheterX/catheterY)) * (180/Math.PI) + 180 :
             Math.atan(1/(catheterX/catheterY)) * (180/Math.PI);
+        let sideAB = hypotenuse/2;
+        let sideC = 2 * sideAB * Math.sin(angle/2 * Math.PI / 180);
 
-        sideA = sideB = state.hypotenuse/2;
-        sideC = 2 * sideA * Math.sin(this.state.angle/2 * Math.PI / 180);
-
-        heightOfTriangle = sideB * Math.sin(this.state.angle * Math.PI / 180);
+        heightOfTriangle = sideAB * Math.sin(angle * Math.PI / 180);
         offsetToLeft = Math.sqrt(sideC*sideC - heightOfTriangle*heightOfTriangle);
 
-        state.top  = fromY + heightOfTriangle;
-        state.left = fromX - offsetToLeft;
+        let top  = fromY + heightOfTriangle;
+        let left = fromX - offsetToLeft;
+
 
         return {
-            top:   state.top,
-            left:  state.left,
-            angle: state.angle,
-            hypotenuse: state.hypotenuse,
-        };
+                top:   top,
+                left:  left,
+                transform: `rotateZ(${angle}deg)`,
+                width: hypotenuse
+        }
     }
 
 
     render () {
 
-        this.drawConnection (this.state);
-
-        //console.log("this.state", this.state);
-        //console.log("this.props", this.props.info);
-
         return (
             <div
                 className="Connection"
-                style={{
-                        top:   this.state.top,
-                        left:  this.state.left,
-                        width: this.state.hypotenuse,
-                        transform: `rotateZ(${this.state.angle}deg)`
-                    }}
-                ></div>
+                style={ this.drawConnection(this.props.from, this.props.to)}
+                >
+            </div>
         );
     }
 
