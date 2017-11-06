@@ -1,6 +1,5 @@
 export const moveBlocks = (block) => {
-
-    return {
+     return {
         type: 'EDIT_BLOCK',
         payload: {
           'data': block.state

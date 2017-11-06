@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import "./Connection.css";
 
-class Connection extends React.Component {
+
+class Connection extends Component {
 
     constructor (props) {
         super(props);

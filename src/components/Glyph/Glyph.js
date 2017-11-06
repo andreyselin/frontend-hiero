@@ -1,18 +1,20 @@
 import React from 'react';
 import './Glyph.css';
+import {connect} from 'react-redux';
 
 class Glyph extends React.Component {
     constructor (props) {
         super(props);
-        this.state = this.props.info;
+        this.state = this.props.data;
         this.onMouseDown = this.onMouseDown.bind(this);
     }
 
-    onMouseDown() {
-        this.props.moveBlock(this);
+    onMouseDown(event) {
+        return this.props.moveBlock(this, event);
     }
 
     render () {
+
         return (
             <div className="Glyph"
                  style={{
@@ -26,11 +28,17 @@ class Glyph extends React.Component {
                  onMouseDown = {this.onMouseDown}
                  onMouseUp = {this.state.onMouseUp}
                 >
-                <img src="http://www2.b2bcg.ru/upload/iblock/a73/a73753d3ab8de6e5f9a3291798cc08e8.jpg" alt="BELKA HERE" />
-                <span>Alex Under</span>
+                <img src={this.props.info.img} alt={this.props.info.alt} />
+                <span>{this.props.info.name}</span>
             </div>
         )
     }
 }
 
-export default Glyph;
+function mapStateToProps(state) {
+    return {
+        info: state.info
+    }
+}
+
+export default connect(mapStateToProps)(Glyph);
