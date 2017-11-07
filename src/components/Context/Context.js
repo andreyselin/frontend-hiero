@@ -3,20 +3,21 @@ import Glyph from '../Glyph';
 import Connection from '../Connection';
 import "./Context.css";
 import {connect} from 'react-redux';
-import {moveBlocks} from '../../actions/moveblocks';
-import {createBlock} from '../../actions/createblock';
+import {moveGlyph} from '../../actions/moveglyph';
+import {createGlyph} from '../../actions/createglyph';
 import {bindActionCreators} from 'redux';
 
 
 function mapStateToProps(state) {
     return {
         glyphs: state.glyphs.glyphs,
-        connections: state.glyphs.connections
+        connections: state.glyphs.connections,
+        info: state.info
     }
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({moveBlocks: moveBlocks, createBlock: createBlock}, dispatch);
+    return bindActionCreators({moveGlyph: moveGlyph, createGlyph: createGlyph}, dispatch);
 }
 
 class Context extends Component {
@@ -27,32 +28,30 @@ class Context extends Component {
 
     }
 
-    moveBlock(block, event) {
+    moveBlock(glyph, event) {
         let that = this;
-        let shiftX = event.clientX - block.state.l;
-        let shiftY = event.clientY - block.state.t;
+        let shiftX = event.clientX - glyph.state.l;
+        let shiftY = event.clientY - glyph.state.t;
 
-        block.setState({onMouseUp: function() {
+        glyph.setState({onMouseUp: function() {
                                     that.setState({onMouseMove: null});
-                                    block.setState({onMouseUp: null});
+                                    glyph.setState({onMouseUp: null});
                                     }});
         that.setState({onMouseMove: function(e) {
                                         let coordsLeft = e.clientX - shiftX;
                                         let coordsTop = e.clientY - shiftY;
-                                        block.setState({t: coordsTop, l: coordsLeft });
-                                        that.setState({});                                    // cheat
-                                        that.props.moveBlocks(block);
+                                        glyph.setState({t: coordsTop, l: coordsLeft});
+                                        that.props.moveGlyph(glyph);
                                         }});
-
     }
 
     render () {
 
         return (
             <div className="Context" onMouseMove={this.state.onMouseMove}>
-                <button onClick={this.props.createBlock}> Create </button>
+                <button onClick={this.props.createGlyph}> Create </button>
                 {Object.keys(this.props.glyphs).map((glyphKey, index)=>
-                    <Glyph key={index} data={this.props.glyphs[glyphKey]} moveBlock={this.moveBlock} />
+                    <Glyph key={index} data={this.props.glyphs[glyphKey]} func={this.moveBlock} info={this.props.info}/>
                 )}
                 {this.props.connections.map((connection, index)=>
                     <Connection key={index} from={this.props.glyphs[connection.fromLink]}
