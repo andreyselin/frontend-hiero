@@ -45,7 +45,7 @@ class Context extends Component {
     }
 
     render () {
-        console.log('contex render');
+
         return (
             <div className="Context" onMouseMove={this.state.onMouseMove}>
                 <button onClick={this.props.addGlyph}> Create </button>

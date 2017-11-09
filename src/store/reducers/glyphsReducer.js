@@ -13,10 +13,10 @@ export default function glyphs(state = serverReturnGlyphs, action) {
 
     if (action.type === 'MOVE_GLYPH') {
 
-        let data = action.payload;
-        state[data.link] = data;
-
-        return state;
+        return {
+            ...state,
+            ...{[action.payload.link]:(action.payload)}
+        }
     }
 
     return state;

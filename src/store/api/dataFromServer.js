@@ -32,7 +32,7 @@ export const serverReturnGlyphs = {
 
 
 
-/*export const serverReturnConnections =  [
+export const serverReturnConnections =  [
                                             {
                                                 link: "1a372",
                                                 fromLink: "a402fe",
@@ -43,5 +43,5 @@ export const serverReturnGlyphs = {
                                                 fromLink: "04a2c9",
                                                 toLink: "04a200"
                                             }
-                                        ];*/
+                                        ];
 
