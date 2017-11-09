@@ -1,9 +1,9 @@
 export function drawConnection (from, to) {
 
-    let fromX = from.l,
-        fromY = from.t,
-        toX   = to.l,
-        toY   = to.t;
+    let fromX = from.l + from.w/2,
+        fromY = from.t + from.h/2,
+        toX   = to.l + to.w/2,
+        toY   = to.t + to.h/2;
 
     let heightOfTriangle = 0,
         offsetToLeft = 0;

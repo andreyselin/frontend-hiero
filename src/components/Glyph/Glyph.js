@@ -1,15 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './Glyph.css';
 
-class Glyph extends React.Component {
+class Glyph extends Component {
     constructor (props) {
         super(props);
-        this.state = this.props.data;
+        this.state = this.props.glyph;
         this.onMouseDown = this.onMouseDown.bind(this);
     }
 
     onMouseDown(event) {
-        this.props.func(this, event);
+        this.props.glyphMover(this, event);
     }
 
     render () {
@@ -24,8 +24,8 @@ class Glyph extends React.Component {
                  onMouseDown = {this.onMouseDown}
                  onMouseUp = {this.state.onMouseUp}
                 >
-                <img src={this.props.info.img} alt={this.props.info.alt} />
-                <span>{this.props.info.title}</span>
+                <img src={this.props.glyph.img}/>
+                <span>{this.props.glyph.label}</span>
             </div>
         )
     }

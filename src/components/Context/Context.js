@@ -3,32 +3,31 @@ import Glyph from '../Glyph';
 import Connection from '../Connection';
 import "./Context.css";
 import {connect} from 'react-redux';
-import {moveGlyph} from '../../actions/moveglyph';
-import {createGlyph} from '../../actions/createglyph';
+import {moveGlyph} from '../../actions/moveGlyph';
+import {addGlyph} from '../../actions/addGlyph';
 import {bindActionCreators} from 'redux';
 
 
 function mapStateToProps(state) {
     return {
-        glyphs: state.glyphs.glyphs,
-        connections: state.glyphs.connections,
-        info: state.info
+        glyphs: state.glyphs,
+        connections: state.connections
     }
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({moveGlyph: moveGlyph, createGlyph: createGlyph}, dispatch);
+    return bindActionCreators({moveGlyph: moveGlyph, addGlyph: addGlyph}, dispatch);
 }
 
 class Context extends Component {
     constructor (props) {
         super(props);
         this.state = {};
-        this.moveBlock = this.moveBlock.bind(this);
+        this.glyphMover = this.glyphMover.bind(this);
 
     }
 
-    moveBlock(glyph, event) {
+    glyphMover(glyph, event) {
         let that = this;
         let shiftX = event.clientX - glyph.state.l;
         let shiftY = event.clientY - glyph.state.t;
@@ -46,12 +45,12 @@ class Context extends Component {
     }
 
     render () {
-
+        console.log('contex render');
         return (
             <div className="Context" onMouseMove={this.state.onMouseMove}>
-                <button onClick={this.props.createGlyph}> Create </button>
+                <button onClick={this.props.addGlyph}> Create </button>
                 {Object.keys(this.props.glyphs).map((glyphKey, index)=>
-                    <Glyph key={index} data={this.props.glyphs[glyphKey]} func={this.moveBlock} info={this.props.info}/>
+                    <Glyph key={index} glyph={this.props.glyphs[glyphKey]} glyphMover={this.glyphMover} />
                 )}
                 {this.props.connections.map((connection, index)=>
                     <Connection key={index} from={this.props.glyphs[connection.fromLink]}

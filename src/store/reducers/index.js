@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux';
-import createGlyphsAndConnections from './glyphs';
-import info from './info';
+import glyphs from './glyphsReducer';
+import connections from './connectionsReducer';
 
 
 const allReducers = combineReducers({
-    glyphs: createGlyphsAndConnections,
-    info: info
+    glyphs: glyphs,
+    connections: connections
 });
 
 export default allReducers;
