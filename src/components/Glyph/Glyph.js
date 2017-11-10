@@ -24,10 +24,10 @@ class Glyph extends Component {
                  onMouseDown = {this.onMouseDown}
                  onMouseUp = {this.state.onMouseUp}
                 >
-                <div class='GlyphImg'>
+                <div className='GlyphImg'>
                     <img src={this.props.glyph.img} alt={this.props.glyph.label}/>
                 </div>
-                <div class='GlyphContent'>
+                <div className='GlyphContent'>
                     <span>{this.props.glyph.label}</span>
                 </div>
             </div>
