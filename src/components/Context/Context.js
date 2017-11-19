@@ -4,9 +4,7 @@ import Connection from '../Connection';
 import "./Context.css";
 import {connect} from 'react-redux';
 import {moveGlyph} from '../../actions/moveGlyph';
-import {addGlyph} from '../../actions/addGlyph';
 import {bindActionCreators} from 'redux';
-import Store from '../../store/store.js';
 
 
 function mapStateToProps(state) {
@@ -19,7 +17,6 @@ function mapStateToProps(state) {
 function matchDispatchToProps(dispatch) {
     return bindActionCreators(
         {
-            addGlyph: addGlyph,
             moveGlyph: moveGlyph
         },
         dispatch
@@ -58,7 +55,10 @@ class Context extends Component {
 
     render () {
         return (
-            <div className="Context" onMouseMove={this.state.onMouseMove}>
+            <div
+                className="Context"
+                onMouseMove={this.state.onMouseMove}
+                >
                 {Object.keys(this.props.glyphs).map((glyphKey, index)=>
                     <Glyph
                         key={index}

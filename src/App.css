@@ -1,4 +1,8 @@
 :root {
+
+  --z-menu:200;
+  --z-context:100;
+
   --z-connection:10;
   --z-glyph:20;
 }

@@ -4,5 +4,6 @@
     /*background: url(http://www.powerpointhintergrund.com/uploads/dotted-grid-background-presentation-7.gif) top left;*/
     min-width: 100vw;
     min-height: 100vh;
+    z-index: var(--z-context);
 
 }
