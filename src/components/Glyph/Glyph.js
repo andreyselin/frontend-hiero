@@ -9,7 +9,7 @@ class Glyph extends Component {
     }
 
     onMouseDown(event) {
-        this.props.glyphMover(this, event);
+        this.props.moveGlyph(this, event);
     }
 
     render () {

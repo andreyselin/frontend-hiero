@@ -1,7 +1,8 @@
-import {serverReturnGlyphs} from '../api/dataFromServer';
+import {getContextFromServer} from '../api/dataFromServer';
 
 
-export default function glyphs(state = serverReturnGlyphs, action) {
+/*-glyphReducer-*/
+export default function glyphs(state = getContextFromServer.glyphs, action) {
 
     if (action.type === 'ADD_GLYPH') {
 
@@ -21,3 +22,4 @@ export default function glyphs(state = serverReturnGlyphs, action) {
 
     return state;
 }
+/*-/glyphReducer-*/

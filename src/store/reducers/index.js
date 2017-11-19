@@ -4,8 +4,10 @@ import connections from './connectionsReducer';
 
 
 const allReducers = combineReducers({
-    glyphs: glyphs,
-    connections: connections
+    context: combineReducers({
+        glyphs: glyphs,
+        connections: connections
+    }),
 });
 
 export default allReducers;

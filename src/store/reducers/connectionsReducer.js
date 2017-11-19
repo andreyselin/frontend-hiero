@@ -1,7 +1,6 @@
-import {serverReturnConnections} from '../api/dataFromServer';
+import {getContextFromServer} from '../api/dataFromServer';
 
-export default function connections(state = serverReturnConnections, action) {
-
-    return   state;
+export default function connections(state = getContextFromServer.connections, action) {
+    return state;
 }
 
