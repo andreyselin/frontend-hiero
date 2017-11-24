@@ -3,7 +3,8 @@ import Glyph from '../Glyph';
 import Connection from '../Connection';
 import "./Context.css";
 import {connect} from 'react-redux';
-import {moveGlyph} from '../../actions/moveGlyph';
+import classNames from 'classnames';
+import {moveGlyph} from '../../store/actions/glyphActions';
 import {bindActionCreators} from 'redux';
 
 
@@ -56,7 +57,10 @@ class Context extends Component {
     render () {
         return (
             <div
-                className="Context"
+                className={classNames(
+                    "Context",
+                    "ConnectionMode2"
+                )}
                 onMouseMove={this.state.onMouseMove}
                 >
                 {Object.keys(this.props.glyphs).map((glyphKey, index)=>

@@ -1,18 +1,19 @@
-import {getContextFromServer} from '../api/dataFromServer';
+import {initialContext} from '../api/dataFromServer';
+import actionTypes from '../../constants/actionTypes';
 
 
 /*-glyphReducer-*/
-export default function glyphs(state = getContextFromServer.glyphs, action) {
+export default function glyphs(state = initialContext.glyphs, action) {
 
-    if (action.type === 'ADD_GLYPH') {
+    if (action.type === actionTypes.glyph.add) {
 
         return {
             ...state,
-            [action.payload['name']]:action.payload['data']
+            [action.payload['link']]:action.payload
         }
     }
 
-    if (action.type === 'MOVE_GLYPH') {
+    if (action.type === actionTypes.glyph.move) {
 
         return {
             ...state,

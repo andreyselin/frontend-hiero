@@ -1,6 +1,7 @@
-import {getContextFromServer} from '../api/dataFromServer';
+import {initialContext} from '../api/dataFromServer';
+import actionTypes from '../../constants/actionTypes';
 
-export default function connections(state = getContextFromServer.connections, action) {
+export default function connections(state = initialContext.connections, action) {
     return state;
 }
 
