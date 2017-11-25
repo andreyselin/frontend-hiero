@@ -11,7 +11,8 @@ import {bindActionCreators} from 'redux';
 function mapStateToProps(state) {
     return {
         glyphs: state.context.glyphs,
-        connections: state.context.connections
+        connections: state.context.connections,
+        addConnection: state.app.addConnection
     }
 }
 
@@ -59,7 +60,7 @@ class Context extends Component {
             <div
                 className={classNames(
                     "Context",
-                    "ConnectionMode2"
+                    this.props.addConnection.mode
                 )}
                 onMouseMove={this.state.onMouseMove}
                 >

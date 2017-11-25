@@ -1,7 +1,8 @@
+// Modifier classes of Context div
 const addConnectionModes = {
-    ConnectionModeOff: "ConnectionModeOff", // default
-    ConnectionModeOn: "ConnectionModeOn",
-    FromGlyphChosen: "FromGlyphChosen"
+    connectionModeOff: "ConnectionModeOff",
+    connectionModeOn: "ConnectionModeOn",
+    fromGlyphChosen: "FromGlyphChosen"
 };
 
 export default addConnectionModes;

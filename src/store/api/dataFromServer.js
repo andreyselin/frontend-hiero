@@ -48,5 +48,5 @@ export const initialContext = {
 };
 
 export var initialAppState = {
-    newConnection: {mode: addConnectionModes.ConnectionModeOff}
+    newConnection: {mode: addConnectionModes.connectionModeOff}
 };

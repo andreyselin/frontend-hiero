@@ -7,3 +7,9 @@
     z-index: var(--z-context);
 
 }
+
+/* Shows FROM glyph selector */
+.Context.ConnectionModeOn {}
+
+/* Shows TO glyph selector */
+.Context.FromGlyphChosen {}

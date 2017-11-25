@@ -1,16 +1,13 @@
-import {initialContext, initialAppState} from '../api/dataFromServer';
+import {initialAppState} from '../api/dataFromServer';
 import actionTypes from '../../constants/actionTypes';
 import addConnectionModes from '../../constants/addConnectionModes';
 
 export default function addConnection(state = initialAppState.newConnection, action) {
-
+    
     if (action.type === actionTypes.connection.add.turn.on) {
-
         let newLink = Math.random().toString(36).slice(2);
-        console.log("action", action, state);
-
         return {
-            'mode':addConnectionModes.ConnectionModeOn,
+            'mode':addConnectionModes.connectionModeOn,
             'connection': {
                 link: newLink,
                 fromLink: null,
@@ -18,7 +15,14 @@ export default function addConnection(state = initialAppState.newConnection, act
             }
         }
     }
-
+    
+    if (action.type === actionTypes.connection.add.turn.off) {}
+    
+    if (action.type === actionTypes.connection.add.choose.from) {
+        console.log("!!! alright !!!");
+    }
+    
+    
     return state;
 }
 
