@@ -19,10 +19,20 @@ export default function addConnection(state = initialAppState.newConnection, act
     if (action.type === actionTypes.connection.add.turn.off) {}
     
     if (action.type === actionTypes.connection.add.choose.from) {
-        console.log("!!! alright !!!");
+        let toReturn = {...state};
+        toReturn.mode = addConnectionModes.fromGlyphChosen;
+        toReturn.connection.fromLink = action.payload;
+        return toReturn;
     }
-    
-    
+
+    if (action.type === actionTypes.connection.add.choose.to) {
+        let toReturn = {...state};
+        toReturn.mode = addConnectionModes.connectionModeOff;
+        toReturn.connection.toLink = action.payload;
+        return toReturn;
+    }
+
+
     return state;
 }
 
