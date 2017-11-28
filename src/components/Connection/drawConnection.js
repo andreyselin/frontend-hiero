@@ -1,14 +1,31 @@
 export function drawConnection (from, to) {
 
-    let fromX = from.l + from.w/2,
-        fromY = from.t + from.h/2,
-        toX   = to.l + to.w/2,
-        toY   = to.t + to.h/2;
-
     let heightOfTriangle = 0,
         offsetToLeft = 0;
-    let catheterX = fromX - toX;
-    let catheterY = fromY - toY;
+    let catheterX = from.l - to.l;
+    let catheterY = from.t - to.t;
+
+    let fromX, fromY, toX, toY;
+
+    if (Math.abs(catheterX/catheterY) > from.w/from.h){
+        fromX = from.l + from.w/2 * (catheterX > 0 ? -1 : 1);
+        fromY = from.t + catheterY / (catheterX / (from.w/2)) * (catheterX > 0 ? -1 : 1);
+    } else {
+        fromX = from.l + catheterX / (catheterY / (from.h/2)) * (catheterY > 0 ? -1 : 1);
+        fromY = from.t + from.h/2 * (catheterY > 0 ? -1 : 1);
+    }
+
+    if (Math.abs(catheterX/catheterY) > to.w/to.h){
+        toX = to.l + to.w/2 * (catheterX > 0 ? 1 : -1);
+        toY = to.t + catheterY / (catheterX / (to.w/2)) * (catheterX > 0 ? 1 : -1);
+    } else {
+        toX = to.l + catheterX / (catheterY / (to.h/2)) * (catheterY > 0 ? 1 : -1);
+        toY = to.t + to.h/2 * (catheterY > 0 ? 1 : -1);
+    }
+
+    catheterX = fromX - toX;
+    catheterY = fromY - toY;
+
     let hypotenuse = Math.sqrt(catheterX*catheterX + catheterY*catheterY);
     let angle = catheterX >= 0 ?
         Math.atan(1/(catheterX/catheterY)) * (180/Math.PI) + 180 :

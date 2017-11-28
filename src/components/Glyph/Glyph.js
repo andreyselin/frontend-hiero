@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import classNames from 'classnames';
 import './Glyph.css';
 import {addConnectionChooseFrom, addConnectionChooseTo} from '../../store/actions/connectionActions'
 
@@ -9,6 +10,10 @@ class Glyph extends Component {
         this.state = this.props.glyph;
         this.onMouseDown = this.onMouseDown.bind(this);
         this.chooseConnector = this.chooseConnector.bind(this);
+    }
+
+    componentDidMount(){
+        console.log("this.refs.root.offsetWidth", this.refs.root.offsetWidth);
     }
 
     onMouseDown(event) {
@@ -28,22 +33,30 @@ class Glyph extends Component {
 
     render () {
         return (
-            <div className="Glyph"
+            <div
+                ref='root'
+                className={classNames(
+                    "Glyph",
+                    this.props.glyph.classList
+                )}
+
                  style={{
-                    width:      this.state.w,
-                    height:     this.state.h,
+                    // width:      this.state.w,
+                    // height:     this.state.h,
                     top:        this.state.t,
                     left:       this.state.l
                  }}
                  onMouseDown = {this.onMouseDown}
                  onMouseUp = {this.state.onMouseUp}
                 >
-                <div onClick={this.chooseConnector('from')} className='ConnectorFrom'>Choose connection source</div>
-                <div onClick={this.chooseConnector('to')} className='ConnectorTo'>Choose connection target</div>
+                <div onClick={this.chooseConnector('from')} className='GlyphConnector GlyphConnectorFrom'>Choose<br />connection<br />source</div>
+                <div onClick={this.chooseConnector('to')}   className='GlyphConnector GlyphConnectorTo'>Choose<br />connection<br />target</div>
 
-                <div className='GlyphImg'>
-                    <img src={this.props.glyph.img} alt={this.props.glyph.label}/>
-                </div>
+                {this.props.glyph.img && (
+                    <div className='GlyphImg'>
+                        <img src={this.props.glyph.img.src} /> {/*alt={this.props.glyph.label}/>*/}
+                    </div>
+                )}
                 <div className='GlyphContent'>
                     <span>{this.props.glyph.label}</span>
                 </div>

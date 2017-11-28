@@ -7,11 +7,11 @@ export const initialContext = {
         "g1": {
             link: "g1",
             w: 200,
-            h: 200,
+            h: 100,
             l: 200,
             t: 175,
             label: 'All ICOs',
-            img: 'https://www.shareicon.net/data/128x128/2015/08/25/90855_infinity_457x512.png'
+            img: null
         },
         "g2": {
             link: "g2",
@@ -20,7 +20,7 @@ export const initialContext = {
             l: 500,
             t: 100,
             label: 'Bancor Protocol',
-            img: 'https://files.coinmarketcap.com/static/img/coins/32x32/bancor.png'
+            img: null
         },
         "g3": {
             link: "g3",
@@ -28,16 +28,16 @@ export const initialContext = {
             h: 100,
             l: 500,
             t: 375,
-            label: 'EOS',
-            img: 'https://files.coinmarketcap.com/static/img/coins/32x32/eos.png'
+            label: 'This is what we were talking about',
+            classList: ['GlyphHorizontal'],
+            img: {
+                src: 'https://files.coinmarketcap.com/static/img/coins/32x32/eos.png',
+                w:100,
+                h:150
+            },
         }
     },
     connections: [
-        {
-            link: "c1",
-            fromLink: "g1",
-            toLink: "g2"
-        },
         {
             link: "c2",
             fromLink: "g1",
