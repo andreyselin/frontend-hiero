@@ -21,6 +21,19 @@ export const addGlyph = (newGlyph)=> {
 /*-/addGlyphAction-*/
 
 
+/*-setGlyphBounds-*/
+export const setGlyphBounds = (glyph) => {
+    return {
+        type: actionTypes.glyph.setBounds,
+        payload: {
+            link: glyph.link,
+            w:    glyph.w,
+            h:    glyph.h
+        }
+    };
+};
+/*-/setGlyphBounds-*/
+
 
 /*-moveGlyphAction-*/
 export const moveGlyph = (glyph) => {

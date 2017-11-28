@@ -1,7 +1,8 @@
 const actionTypes = {
     glyph:{
-        add: "ADD_GLYPH",
-        move: "MOVE_GLYPH"
+        add:       "ADD_GLYPH",
+        setBounds: "SET_BOUNDS",
+        move:      "MOVE_GLYPH"
     },
     connection:{
         add:{

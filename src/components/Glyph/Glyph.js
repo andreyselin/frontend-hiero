@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import './Glyph.css';
-import {addConnectionChooseFrom, addConnectionChooseTo} from '../../store/actions/connectionActions'
+import {addConnectionChooseFrom, addConnectionChooseTo} from '../../store/actions/connectionActions';
+import {setGlyphBounds} from '../../store/actions/glyphActions';
 
 class Glyph extends Component {
     constructor (props) {
@@ -13,7 +14,13 @@ class Glyph extends Component {
     }
 
     componentDidMount(){
-        console.log("this.refs.root.offsetWidth", this.refs.root.offsetWidth);
+        
+        // Will be used after editing only
+        this.props.setGlyphBounds({
+            link: this.state.link,
+            w: this.refs.root.offsetWidth,
+            h: this.refs.root.offsetHeight
+        });
     }
 
     onMouseDown(event) {
@@ -37,6 +44,7 @@ class Glyph extends Component {
                 ref='root'
                 className={classNames(
                     "Glyph",
+                    "noselect",
                     this.props.glyph.classList
                 )}
 
@@ -80,6 +88,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         addConnectionChooseTo: (link) => {
             dispatch(addConnectionChooseTo(link))
+        },
+        setGlyphBounds: (glyph) => {
+            dispatch(setGlyphBounds(glyph))
         }
     }
 };
