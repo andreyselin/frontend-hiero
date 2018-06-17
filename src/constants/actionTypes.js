@@ -1,6 +1,7 @@
 const actionTypes = {
     glyph:{
         add:       "ADD_GLYPH",
+        remove:    "REMOVE_GLYPH",
         setBounds: "SET_BOUNDS",
         move:      "MOVE_GLYPH"
     },
@@ -14,7 +15,8 @@ const actionTypes = {
                 from: "CONNECTION_ADD_CHOOSE_FROM",
                 to:   "CONNECTION_ADD_CHOOSE_TO"
             }
-        }
+        },
+        remove: "REMOVE_CONNECTION",
     }
 };
 

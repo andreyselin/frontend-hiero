@@ -14,7 +14,7 @@ export const addGlyph = (newGlyph)=> {
             l: 400,
             t: 300,
             label: newGlyph.label || 'default',
-            img: 'http://avt-1.foto.mail.ru/mail/alex.belilovsky/_avatar180?1281727751'
+            img: null
         }
     };
 };

@@ -1,51 +1,6 @@
 import addConnectionModes from '../../constants/addConnectionModes';
 
-export const initialContext = {
-    info: {
-    },
-    glyphs: {
-        "g1": {
-            link: "g1",
-            w: 200,
-            h: 100,
-            l: 200,
-            t: 175,
-            label: 'All ICOs',
-            img: null
-        },
-        "g2": {
-            link: "g2",
-            w: 100,
-            h: 100,
-            l: 500,
-            t: 100,
-            label: 'Bancor Protocol',
-            img: null
-        },
-        "g3": {
-            link: "g3",
-            w: 100,
-            h: 100,
-            l: 500,
-            t: 375,
-            label: 'This is what we were talking about',
-            classList: ['GlyphHorizontal'],
-            img: {
-                src: 'https://files.coinmarketcap.com/static/img/coins/32x32/eos.png',
-                w:100,
-                h:150
-            },
-        }
-    },
-    connections: [
-        {
-            link: "c2",
-            fromLink: "g1",
-            toLink: "g3"
-        }
-    ]
-
-};
+export const initialContext = {"glyphs":{"zfe9yuya43b":{"link":"zfe9yuya43b","w":151,"h":19,"l":345,"t":410,"label":"технический запуск"},"7gxckz4l115":{"link":"7gxckz4l115","w":74,"h":19,"l":506,"t":570,"label":"кошельки"},"qk338cxebc":{"link":"qk338cxebc","w":58,"h":19,"l":627,"t":693,"label":"хостинг","img":null},"8xz14ufzcqw":{"link":"8xz14ufzcqw","w":76,"h":19,"l":537,"t":270,"label":"Платежка","img":null},"iqmtuki6nnp":{"link":"iqmtuki6nnp","w":69,"h":19,"l":698,"t":176,"label":"Adv Cash","img":null},"8stpqjcq0yr":{"link":"8stpqjcq0yr","w":74,"h":19,"l":849,"t":155,"label":"Позвонил","img":null},"v784j7l5e8":{"link":"v784j7l5e8","w":103,"h":19,"l":716,"t":222,"label":"Perfect Money","img":null},"rtaztywuwl":{"link":"rtaztywuwl","w":30,"h":19,"l":684,"t":316,"label":"Qiwi","img":null},"tzwi4xqktl":{"link":"tzwi4xqktl","w":84,"h":19,"l":537,"t":411,"label":"смс-сервис","img":null},"evzw57xwpoc":{"link":"evzw57xwpoc","w":115,"h":19,"l":716,"t":410,"label":"закинуть денег","img":null},"z0q1xzts1ud":{"link":"z0q1xzts1ud","w":95,"h":19,"l":714,"t":273,"label":"Advance Pay","img":null}},"connections":[{"link":"67pyt1o8cmf","fromLink":"zfe9yuya43b","toLink":"7gxckz4l115"},{"link":"ha3egpycpb5","fromLink":"7gxckz4l115","toLink":"qk338cxebc"},{"link":"b8qhpe0ouzo","fromLink":"zfe9yuya43b","toLink":"8xz14ufzcqw"},{"link":"4zcr8vckxpe","fromLink":"8xz14ufzcqw","toLink":"iqmtuki6nnp"},{"link":"gjbxfshd40c","fromLink":"iqmtuki6nnp","toLink":"8stpqjcq0yr"},{"link":"mg36uy8j4ce","fromLink":"8xz14ufzcqw","toLink":"v784j7l5e8"},{"link":"viee84v21up","fromLink":"8xz14ufzcqw","toLink":"rtaztywuwl"},{"link":"gae1cez7uot","fromLink":"tzwi4xqktl","toLink":"zfe9yuya43b"},{"link":"tcrxdxqmoj","fromLink":"evzw57xwpoc","toLink":"tzwi4xqktl"},{"link":"hshja5gn83g","fromLink":"8xz14ufzcqw","toLink":"z0q1xzts1ud"}]};
 
 export var initialAppState = {
     newConnection: {mode: addConnectionModes.connectionModeOff}
