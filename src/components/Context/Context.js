@@ -40,6 +40,12 @@ class Context extends Component {
 
         glyph.setState({
             onMouseUp: function() {
+                let checkMenuClickFinish = Date.now();
+
+                console.log(checkMenuClickFinish);
+                if (checkMenuClickFinish - glyph.checkMenuClickStart < 150) {
+                    console.log('click');
+                }
                 $this.setState({onMouseMove: null});
                 glyph.setState({onMouseUp: null});
             }
