@@ -26,7 +26,6 @@ class Glyph extends Component {
 
     onMouseDown(event) {
         this.checkMenuClickStart = Date.now();
-        console.log(this.checkMenuClickStart);
         this.props.moveGlyph(this, event);
     }
 
@@ -97,4 +96,5 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 };
+//export default connect(mapStateToProps, mapDispatchToProps)(Glyph);
 export default connect(mapStateToProps, mapDispatchToProps)(Glyph);

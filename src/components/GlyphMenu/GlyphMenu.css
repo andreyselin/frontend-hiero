@@ -1,0 +1,24 @@
+.glyph-menu{
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    left: 5%;
+    top: 5%;
+    background-color: coral;
+    padding: 5px;
+    border-radius: 5px;
+    display: none;
+    z-index: 50;
+}
+
+.glyph-item{
+    margin-bottom: 5px;
+}
+
+.glyph-item:last-child{
+    margin-bottom: 0;
+}
+
+.glyph-menu__link:hover{
+    background-color: yellow;
+}
