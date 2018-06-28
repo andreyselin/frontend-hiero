@@ -8,7 +8,7 @@ import {setGlyphBounds} from '../../store/actions/glyphActions';
 class Glyph extends Component {
     constructor (props) {
         super(props);
-        this.state = this.props.glyph;
+        //this.state = this.props.glyph;
         this.onMouseDown = this.onMouseDown.bind(this);
         this.chooseConnector = this.chooseConnector.bind(this);
         this.checkMenuClickStart = 0;
@@ -18,7 +18,7 @@ class Glyph extends Component {
         
         // Will be used after editing only
         this.props.setGlyphBounds({
-            link: this.state.link,
+            link: this.props.glyph.link,
             w: this.refs.root.offsetWidth,
             h: this.refs.root.offsetHeight
         });
@@ -31,11 +31,12 @@ class Glyph extends Component {
 
     chooseConnector(connectorType) {
         let $this = this;
+
         return function (){
             if (connectorType === "from") {
-                $this.props.addConnectionChooseFrom($this.state.link);
+                $this.props.addConnectionChooseFrom($this.props.glyph.link);
             } else if (connectorType === "to") {
-                $this.props.addConnectionChooseTo($this.state.link);
+                $this.props.addConnectionChooseTo($this.props.glyph.link);
             }
         }
     }
@@ -57,7 +58,7 @@ class Glyph extends Component {
                     left:       this.props.glyph.l
                  }}
                  onMouseDown = {this.onMouseDown}
-                 onMouseUp = {this.state.onMouseUp}
+                 onMouseUp = {this.onMouseUp}
                 >
                 <div onClick={this.chooseConnector('from')} className='GlyphConnector GlyphConnectorFrom'>Choose<br />connection<br />source</div>
                 <div onClick={this.chooseConnector('to')}   className='GlyphConnector GlyphConnectorTo'>Choose<br />connection<br />target</div>

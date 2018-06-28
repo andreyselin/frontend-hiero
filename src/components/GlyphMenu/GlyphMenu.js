@@ -4,7 +4,7 @@ import './GlyphMenu.css';
 class GlyphMenu extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.params = {
             top: '5%',
             left: '5%',
             display: 'none',
@@ -18,7 +18,7 @@ class GlyphMenu extends Component {
 
     moveTree(e) {
         e.preventDefault();
-        this.props.moveTree(this.state.targetGlyph);
+        this.props.moveTree(this.params.targetGlyph);
     }
 
     editGlyph(e) {
@@ -35,9 +35,9 @@ class GlyphMenu extends Component {
         return (
             <div className = "glyph-menu"
                 style = {{
-                    top: this.state.top,
-                    left: this.state.left,
-                    display: this.state.display
+                    top: this.params.top,
+                    left: this.params.left,
+                    display: this.params.display
                 }}>
                 <ul className = "glyph-menu__list">
                     <li className = "glyph-menu__item">

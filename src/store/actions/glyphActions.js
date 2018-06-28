@@ -39,7 +39,7 @@ export const setGlyphBounds = (glyph) => {
 export const moveGlyph = (glyph) => {
     return {
         type: actionTypes.glyph.move,
-        payload: glyph.state
+        payload: glyph
     }
 }
 /*-/moveGlyphAction-*/
