@@ -3,7 +3,8 @@ const actionTypes = {
         add:       "ADD_GLYPH",
         remove:    "REMOVE_GLYPH",
         setBounds: "SET_BOUNDS",
-        move:      "MOVE_GLYPH"
+        move:      "MOVE_GLYPH",
+        moveTree:  "MOVE_GLYPH_TREE"
     },
     connection:{
         add:{

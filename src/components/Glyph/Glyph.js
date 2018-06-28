@@ -53,8 +53,8 @@ class Glyph extends Component {
                  style={{
                     // width:      this.state.w,
                     // height:     this.state.h,
-                    top:        this.state.t,
-                    left:       this.state.l
+                    top:        this.props.glyph.t,
+                    left:       this.props.glyph.l
                  }}
                  onMouseDown = {this.onMouseDown}
                  onMouseUp = {this.state.onMouseUp}
@@ -68,7 +68,7 @@ class Glyph extends Component {
                     </div>
                 )}
                 <div className='GlyphContent'>
-                    <span>{this.props.glyph.label}</span>
+                    <span className='GlyphSpan'>{this.props.glyph.label}</span>
                 </div>
             </div>
         )
@@ -96,5 +96,5 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 };
-//export default connect(mapStateToProps, mapDispatchToProps)(Glyph);
+
 export default connect(mapStateToProps, mapDispatchToProps)(Glyph);

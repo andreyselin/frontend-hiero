@@ -7,13 +7,18 @@ class GlyphMenu extends Component {
         this.state = {
             top: '5%',
             left: '5%',
-            display: 'none'
+            display: 'none',
+            targetGlyph: null
         }
+
+        this.moveTree = this.moveTree.bind(this);
+        this.editGlyph = this.editGlyph.bind(this);
+        this.deleteGlyph = this.deleteGlyph.bind(this);
     }
 
     moveTree(e) {
         e.preventDefault();
-        console.log('move');
+        this.props.moveTree(this.state.targetGlyph);
     }
 
     editGlyph(e) {
@@ -61,17 +66,5 @@ class GlyphMenu extends Component {
         )
     }
 }
-
-/* const mapStateToProps = (state) => {
-    return state;
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-       
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(GlyphMenu); */
 
 export default GlyphMenu;

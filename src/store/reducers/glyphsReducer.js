@@ -14,7 +14,7 @@ export default function glyphs(state = initialContext.glyphs, action) {
     }
 
     if  (action.type === actionTypes.glyph.setBounds) {
-        //console.log("!");
+        
         return {
             ...state,
             [action.payload.link]:{...state[action.payload.link], ...action.payload}
@@ -22,7 +22,19 @@ export default function glyphs(state = initialContext.glyphs, action) {
     }
 
     if (action.type === actionTypes.glyph.move) {
+        
+        return {
+            ...state,
+            [action.payload.link]:{
+                ...state[action.payload.link],
+                t: action.payload.t,
+                l: action.payload.l
+            }
+        }
+    }
 
+    if (action.type === actionTypes.glyph.moveTree) {
+        
         return {
             ...state,
             [action.payload.link]:{

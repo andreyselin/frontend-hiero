@@ -43,3 +43,10 @@ export const moveGlyph = (glyph) => {
     }
 }
 /*-/moveGlyphAction-*/
+
+export const moveGlyphTree = (glyph) => {
+    return {
+        type: actionTypes.glyph.moveTree,
+        payload: glyph
+    }
+}
