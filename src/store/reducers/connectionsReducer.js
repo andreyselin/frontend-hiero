@@ -16,6 +16,13 @@ export default function connections(state = initialContext.connections, action) 
         ];
     }
 
+    if (action.type === actionTypes.connection.remove) {
+        console.log('Connection reducer')
+        return [
+            ...state
+        ];
+    }
+
     return state;
 }
 

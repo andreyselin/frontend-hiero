@@ -7,12 +7,13 @@ import classNames from 'classnames';
 import {moveGlyph, moveGlyphTree} from '../../store/actions/glyphActions';
 import {bindActionCreators} from 'redux';
 import GlyphMenu from '../GlyphMenu';
+import ConnectionMenu from '../ConnectionMenu';
 import {getGlyphsArray, findChildrenLinks} from './contextFuncs';
 
 function mapStateToProps(state) {
     return {
         glyphs: state.context.glyphs,
-        state: state,
+        /* state: state, */
         connections: state.context.connections,
         addConnection: state.app.addConnection
     }
@@ -35,7 +36,13 @@ class Context extends Component {
         this.isMoovingTree = false;
         this.moveGlyph = this.moveGlyph.bind(this);
         this.moveTree = this.moveTree.bind(this);
-        //this.findChildrenLinks = this.findChildrenLinks.bind(this);
+        this.onConnectionClick = this.onConnectionClick.bind(this);
+        this.connectionMenuParams = {
+            top: '5%',
+            left: '5%',
+            display: 'none',
+            targetConnection: null
+        };
     }
 
     moveGlyph(glyph, event) {
@@ -46,12 +53,10 @@ class Context extends Component {
     
             $this.setState({
                 onMouseUp: function() {
-                    //console.log('up');
                     let checkMenuClickFinish = Date.now();
     
                     if (checkMenuClickFinish - glyph.checkMenuClickStart < 150) {
                         let glyphMenu = $this.refs.glyphMenu;
-                        //console.log('create menu');
                         
                         glyphMenu.params.top = glyph.props.glyph.t;
                         glyphMenu.params.left = glyph.props.glyph.l;
@@ -60,7 +65,6 @@ class Context extends Component {
                        
                         $this.setState({
                             mouseClick: (e) => {
-                                //console.log('moveGlyph');
                                 if (!e.target.classList.contains('GlyphSpan')) {
                                     glyphMenu.params.display = 'none';
                                     glyphMenu.params.targetGlyph = null;
@@ -123,6 +127,23 @@ class Context extends Component {
         });
     }
 
+    onConnectionClick(e) {
+        let ConnectionMenu = this.refs.connectionMenu;
+        
+        console.log(ConnectionMenu.props);
+        /* ConnectionMenu.params.top = e.clientY;
+        ConnectionMenu.params.left = e.clientX;
+        ConnectionMenu.params.display = 'block'; */
+        ConnectionMenu.props.params.top = e.clientY;
+        ConnectionMenu.props.params.left = e.clientX;
+        ConnectionMenu.props.params.display = 'block';
+        //ConnectionMenu.params.targetGlyph = glyph;
+    }
+
+    removeConnection() {
+        // remove connection
+    }
+
     render () {
         return (
             <div className={ classNames("Context", this.props.addConnection.mode) }
@@ -131,6 +152,9 @@ class Context extends Component {
                  onMouseDown={this.state.onMouseDown}
                  onMouseUp={this.state.onMouseUp}>                 
                 <GlyphMenu ref="glyphMenu" moveTree={this.moveTree} />
+                <ConnectionMenu ref="connectionMenu"
+                                removeConnection={this.removeConnection}
+                                params={this.connectionMenuParams} />
                 {Object.keys(this.props.glyphs).map((glyphKey, index)=>
                     <Glyph
                         key={index}
@@ -141,7 +165,9 @@ class Context extends Component {
                     <Connection
                         key={index}
                         from={this.props.glyphs[connection.fromLink]}
-                        to={this.props.glyphs[connection.toLink]}/>
+                        to={this.props.glyphs[connection.toLink]}
+                        onClick={this.onConnectionClick}
+                        connection={connection} />
                 )}
             </div>
         )
