@@ -29,6 +29,7 @@ export const addConnectionChooseTo = (toLink)=> {
 
 export const removeConnection = (connection) => {
     return {
-        type: actionTypes.connection.remove
+        type: actionTypes.connection.remove,
+        payload: connection
     };
 };

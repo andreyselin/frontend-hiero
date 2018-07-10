@@ -7,8 +7,9 @@ class Connection extends Component {
     render() {
         return (
             <div className="Connection"
-                 onClick={this.props.onClick}
-                 style={drawConnection(this.props.from, this.props.to)}>
+                 onClick={this.props.onClick.bind(null, this.props.connection.link)}
+                 style={drawConnection(this.props.from, this.props.to)}
+                 data-link-key={this.props.connection.link} >
             </div>
         )
     }

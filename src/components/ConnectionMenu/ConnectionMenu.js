@@ -2,28 +2,35 @@ import React, {Component} from 'react';
 import './ConnectionMenu.css';
 
 class ConnectionMenu extends Component {
-    /* constructor(props) {
+    constructor(props) {
         super(props);
-        this.params = this.props.params;
-    } */
+        this.state = {
+            top: '5%',
+            left: '5%',
+            display: 'none',
+            targetConnection: null
+        };
+        this.removeConnection = this.removeConnection.bind(this);
+    }
 
-    removeConnection(connection) {
-        console.log('remove');
+    removeConnection(e) {
+        e.preventDefault();
+        this.props.removeConnection(e, this.state.targetConnection);
     }
 
     render () {
         return (
             <div className = "connection-menu"
                 style = {{
-                    top: this.props.params.top,
-                    left: this.props.params.left,
-                    display: this.props.params.display
+                    top: this.state.top,
+                    left: this.state.left,
+                    display: this.state.display
                 }}>
                 <ul className = "connection-menu__list">
                     <li className = "connection-menu__item">
                         <a className = "connection-menu__link"
                            onClick = { this.removeConnection }
-                           href="Remove">
+                           href="removeLink">
                             Remove
                         </a>
                     </li>
