@@ -1,0 +1,24 @@
+.connection-menu{
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    left: 5%;
+    top: 5%;
+    background-color: coral;
+    padding: 5px;
+    border-radius: 5px;
+    display: none;
+    z-index: 50;
+}
+
+.connection-item{
+    margin-bottom: 5px;
+}
+
+.connection-item:last-child{
+    margin-bottom: 0;
+}
+
+.connection-menu__link:hover{
+    background-color: yellow;
+}
