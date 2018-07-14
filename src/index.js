@@ -16,5 +16,5 @@ ReactDOM.render(<Provider store={store}>
                 document.getElementById('AppRoot'));
 
 
-registerServiceWorker();
+//registerServiceWorker();
 

@@ -1,6 +1,7 @@
 .Connection {
     position: absolute;
-    border-top: 5px solid #8cc4cc;
-    margin-top: -2.5px;
+    /*border-top: 5px solid #8cc4cc;*/
+    border-top: 3px solid rgba(48, 48, 102, 0.1);
+    margin-top: -1.5px;
     z-index: var(--z-connection);
 }
