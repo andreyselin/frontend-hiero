@@ -1,9 +1,9 @@
-import {initialContext} from '../api/dataFromServer';
+import contextsService from '../../services/contexts';
 import actionTypes from '../../constants/actionTypes';
 
 
 /*-glyphReducer-*/
-export default function glyphs(state = initialContext.glyphs, action) {
+export default function glyphs(state = contextsService.currentContext.glyphs, action) {
 
     if (action.type === actionTypes.glyph.add) {
 
