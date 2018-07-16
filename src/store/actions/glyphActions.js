@@ -41,7 +41,7 @@ export const moveGlyph = (glyph) => {
         type: actionTypes.glyph.move,
         payload: glyph
     }
-}
+};
 /*-/moveGlyphAction-*/
 
 export const moveGlyphTree = (glyph) => {
@@ -49,4 +49,11 @@ export const moveGlyphTree = (glyph) => {
         type: actionTypes.glyph.moveTree,
         payload: glyph
     }
-}
+};
+
+export const updageAllGlyphs = (newGlyphs) => { //
+    return {
+        type: actionTypes.glyph.updateAll,
+        payload: newGlyphs
+    }
+};

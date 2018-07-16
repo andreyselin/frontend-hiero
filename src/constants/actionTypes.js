@@ -4,7 +4,8 @@ const actionTypes = {
         remove:    "REMOVE_GLYPH",
         setBounds: "SET_BOUNDS",
         move:      "MOVE_GLYPH",
-        moveTree:  "MOVE_GLYPH_TREE"
+        moveTree:  "MOVE_GLYPH_TREE",
+        updateAll: "GLYPH_UPDATE_ALL"
     },
     connection:{
         add:{
@@ -17,6 +18,7 @@ const actionTypes = {
                 to:   "CONNECTION_ADD_CHOOSE_TO"
             }
         },
+        updateAll: "CONNECTION_UPDATE_ALL",
         remove: "REMOVE_CONNECTION",
     }
 };

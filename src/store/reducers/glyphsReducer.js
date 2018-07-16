@@ -45,6 +45,10 @@ export default function glyphs(state = contextsService.currentContext.glyphs, ac
         }
     }
 
+    if (action.type === actionTypes.glyph.updateAll) {
+        return action.payload;
+    }
+
     return state;
 }
 /*-/glyphReducer-*/

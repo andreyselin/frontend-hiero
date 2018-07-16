@@ -32,6 +32,10 @@ export default function connections(state = contextsService.currentContext.conne
         ];
     }
 
+    if (action.type === actionTypes.connection.updateAll) {
+        return action.payload;
+    }
+
     return state;
 }
 
