@@ -49,6 +49,17 @@ export default function glyphs(state = contextsService.currentContext.glyphs, ac
         return action.payload;
     }
 
+    if (action.type === actionTypes.glyph.remove) {
+        //console.log('reducer ', action.payload)
+        let newState = {...state};
+
+        delete newState[action.payload];
+
+        return {
+            ...newState
+        }
+    }
+
     return state;
 }
 /*-/glyphReducer-*/

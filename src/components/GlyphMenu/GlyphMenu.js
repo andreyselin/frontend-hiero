@@ -13,7 +13,7 @@ class GlyphMenu extends Component {
 
         this.moveTree = this.moveTree.bind(this);
         this.editGlyph = this.editGlyph.bind(this);
-        this.deleteGlyph = this.deleteGlyph.bind(this);
+        this.removeGlyph = this.removeGlyph.bind(this);
     }
 
     moveTree(e) {
@@ -26,9 +26,10 @@ class GlyphMenu extends Component {
         console.log('edit');
     }
 
-    deleteGlyph(e) {
+    removeGlyph(e) {
         e.preventDefault();
-        console.log('delete');
+        console.log('delete', this.props);
+        this.props.removeGlyph(this.params.targetGlyph);
     }
 
     render () {
@@ -56,7 +57,7 @@ class GlyphMenu extends Component {
                     </li>
                     <li className = "glyph-menu__item">
                         <a className = "glyph-menu__link"
-                           onClick = { this.deleteGlyph }
+                           onClick = { this.removeGlyph }
                            href="Delete">
                             Delete glyph
                         </a>

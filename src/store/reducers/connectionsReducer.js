@@ -17,9 +17,9 @@ export default function connections(state = contextsService.currentContext.conne
     }
 
     if (action.type === actionTypes.connection.remove) {
-        console.log('Connection reducer', action.payload)
-        console.log('state ', state)
-        let newState = state
+        //console.log('Connection reducer', action.payload)
+        //console.log('state ', state)
+        let newState = [...state];
         let linkId = action.payload
         let removeConnectionPosition = newState.findIndex((item) => {
             return item.link === linkId
