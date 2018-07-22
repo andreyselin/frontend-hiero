@@ -8,7 +8,6 @@ import {setGlyphBounds} from '../../store/actions/glyphActions';
 class Glyph extends Component {
     constructor (props) {
         super(props);
-        //this.state = this.props.glyph;
         this.onMouseDown = this.onMouseDown.bind(this);
         this.chooseConnector = this.chooseConnector.bind(this);
         this.checkMenuClickStart = 0;

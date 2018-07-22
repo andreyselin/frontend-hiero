@@ -63,11 +63,16 @@ class Context extends Component {
                         glyphMenu.params.targetGlyph = glyph;
                        
                         $this.setState({
-                            mouseClick: (e) => {
-                                if (!e.target.classList.contains('GlyphSpan')) {
+                            mouseClick: (e) => {                                
+                                let targetClassList = e.target.classList;
+                                
+                                if ((!targetClassList.contains('GlyphSpan')) && (!targetClassList.contains('glyph-menu__link--edit'))) {
                                     glyphMenu.params.display = 'none';
                                     glyphMenu.params.targetGlyph = null;
                                     $this.setState({mouseClick: null});
+                                    if (glyphMenu.refs.mainGlyphMenu.classList.contains('glyph-menu__list--hidden')) {
+                                        glyphMenu.toggleClasses();
+                                    }
                                 }
                             }
                         });
