@@ -32,7 +32,17 @@ function findChildrenLinks(targetGlyph, context) {
     }
 }
 
+function findGlyphsConections(glyph, context) {
+    let allConnections = context.props.connections;
+    let removeConnections = allConnections.filter((connection) => {
+        return (connection.fromLink === glyph) || (connection.toLink === glyph);
+    });
+    
+    return removeConnections;
+}
+
 export {
     getGlyphsArray,
-    findChildrenLinks
+    findChildrenLinks,
+    findGlyphsConections
 }

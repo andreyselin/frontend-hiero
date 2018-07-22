@@ -57,3 +57,10 @@ export const updageAllGlyphs = (newGlyphs) => { //
         payload: newGlyphs
     }
 };
+
+export const removeGlyph = (glyph) => {
+    return {
+        type: actionTypes.glyph.remove,
+        payload: glyph
+    }
+};

@@ -4,11 +4,11 @@ import Connection from '../Connection';
 import "./Context.css";
 import {connect} from 'react-redux';
 import classNames from 'classnames';
-import {moveGlyph, moveGlyphTree} from '../../store/actions/glyphActions';
+import {moveGlyph, moveGlyphTree, removeGlyph} from '../../store/actions/glyphActions';
 import {bindActionCreators} from 'redux';
 import GlyphMenu from '../GlyphMenu';
 import ConnectionMenu from '../ConnectionMenu';
-import {getGlyphsArray, findChildrenLinks} from './contextFuncs';
+import {getGlyphsArray, findChildrenLinks, findGlyphsConections} from './contextFuncs';
 import { removeConnection } from '../../store/actions/connectionActions';
 
 function mapStateToProps(state) {
@@ -24,6 +24,7 @@ function matchDispatchToProps(dispatch) {
         {
             moveGlyph: moveGlyph,
             moveGlyphTree: moveGlyphTree,
+            removeGlyph: removeGlyph,
             removeConnection: removeConnection
         },
         dispatch
@@ -41,6 +42,7 @@ class Context extends Component {
         this.onConnectionClick = this.onConnectionClick.bind(this);
         this.onConnectionClick = this.onConnectionClick.bind(this);
         this.removeConnection = this.removeConnection.bind(this);
+        this.removeGlyph = this.removeGlyph.bind(this);
     }
 
     moveGlyph(glyph, event) {
@@ -167,6 +169,16 @@ class Context extends Component {
         this.setState({mouseClick: null});
     }
 
+    removeGlyph(glyph) {
+        let targetGlyph = glyph.props.glyph.link;
+        let removeConnections = findGlyphsConections(targetGlyph, this);
+        
+        removeConnections.forEach((connection) => {
+            this.props.removeConnection(connection.link);
+        });
+        this.props.removeGlyph(targetGlyph);
+    }
+
     render () {
         return (
             <div className={ classNames("Context", this.props.addConnection.mode) }
@@ -174,7 +186,8 @@ class Context extends Component {
                  onClick={this.state.mouseClick}
                  onMouseDown={this.state.onMouseDown}
                  onMouseUp={this.state.onMouseUp}>                 
-                <GlyphMenu ref="glyphMenu" moveTree={this.moveTree} />
+                <GlyphMenu ref="glyphMenu" moveTree={this.moveTree}
+                                           removeGlyph={this.removeGlyph} />
                 <ConnectionMenu ref="connectionMenu"
                                 removeConnection={this.removeConnection} />
                 {Object.keys(this.props.content.glyphs).map((glyphKey, index)=>
