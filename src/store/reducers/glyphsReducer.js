@@ -1,9 +1,9 @@
-import contextsService from '../../services/contexts';
+import contextService from '../../services/context';
 import actionTypes from '../../constants/actionTypes';
 
 
 /*-glyphReducer-*/
-export default function glyphs(state = contextsService.currentContext.glyphs, action) {
+export default function glyphs(state = {}, action) {
 
     if (action.type === actionTypes.glyph.add) {
 
@@ -22,7 +22,9 @@ export default function glyphs(state = contextsService.currentContext.glyphs, ac
     }
 
     if (action.type === actionTypes.glyph.move) {
-        
+
+        console.log("move reducer", action.payload, action.payload.link);
+
         return {
             ...state,
             [action.payload.link]:{
@@ -34,7 +36,9 @@ export default function glyphs(state = contextsService.currentContext.glyphs, ac
     }
 
     if (action.type === actionTypes.glyph.moveTree) {
-        
+
+        console.log("move tree reducer", action.payload, action.payload.link);//
+
         return {
             ...state,
             [action.payload.link]:{

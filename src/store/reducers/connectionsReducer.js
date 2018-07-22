@@ -1,8 +1,8 @@
-import contextsService from '../../services/contexts';
+import contextService from '../../services/context';
 import actionTypes from '../../constants/actionTypes';
 import Store from '../store.js';
 
-export default function connections(state = contextsService.currentContext.connections, action) {
+export default function connections(state = [], action) {
 
 
     // actionTypes.connection.add.choose.to

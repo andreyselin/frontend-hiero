@@ -1,13 +1,16 @@
 const actionTypes = {
-    glyph:{
-        add:       "ADD_GLYPH",
-        remove:    "REMOVE_GLYPH",
-        setBounds: "SET_BOUNDS",
-        move:      "MOVE_GLYPH",
-        moveTree:  "MOVE_GLYPH_TREE",
+    navigator: {
+        assignContext: "NAVIGATORS_ASSIGN_A_CONTEXT"
+    },
+    glyph: {
+        add:       "GLYPH_ADD",
+        remove:    "GLYPH_REMOVE",
+        setBounds: "GLYPH_SET_BOUNDS",
+        move:      "GLYPH_MOVE",
+        moveTree:  "GLYPH_MOVE_TREE",
         updateAll: "GLYPH_UPDATE_ALL"
     },
-    connection:{
+    connection: {
         add:{
             turn: {
                 on:  "CONNECTION_ADD_TURN_ON",
@@ -19,7 +22,7 @@ const actionTypes = {
             }
         },
         updateAll: "CONNECTION_UPDATE_ALL",
-        remove: "REMOVE_CONNECTION",
+        remove: "REMOVE_CONNECTION"
     }
 };
 

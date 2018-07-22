@@ -1,16 +1,20 @@
 import {combineReducers} from 'redux';
-import glyphs from './glyphsReducer';
-import connections from './connectionsReducer';
-import addConnection from './addConnectionReducer';
+import navigatorsReducer from './navigatorsReducer';
+import glyphsReducer from './glyphsReducer';
+import connectionsReducer from './connectionsReducer';
+import addConnectionReducer from './addConnectionReducer';
 
 
 const allReducers = combineReducers({
+
+    navigators: navigatorsReducer,
+
     context: combineReducers({
-        glyphs: glyphs,
-        connections: connections
+        glyphs:      glyphsReducer,
+        connections: connectionsReducer
     }),
     app: combineReducers({
-        addConnection: addConnection
+        addConnection: addConnectionReducer
     })
 });
 

@@ -8,7 +8,8 @@ function getGlyphsArray(glyphNames, glyphsStore) {
 
 function findChildrenLinks(targetGlyph, context) {
     let movedGlyphLink = targetGlyph.props.glyph.link;
-    let allConnections = context.props.connections;
+    // console.log("movedGlyphLink", movedGlyphLink);
+    let allConnections = context.connections;
     let allMovingChildren = [];
 
     searchForChildren(movedGlyphLink, allConnections);

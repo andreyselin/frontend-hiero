@@ -34,6 +34,7 @@ class Context extends Component {
     constructor (props) {
         super(props);
         this.state = {};
+        setTimeout(()=>{console.log(this.props)}, 1000);
         this.isMoovingTree = false;
         this.moveGlyph = this.moveGlyph.bind(this);
         this.moveTree = this.moveTree.bind(this);
@@ -89,26 +90,31 @@ class Context extends Component {
         }        
     }
 
+
+
+
+
     moveTree(targetGlyph) {
+        // console.log("--!--");
+        // return;
+
         let startCoords = {
             left: targetGlyph.props.glyph.l,
             top: targetGlyph.props.glyph.t 
         };
-        let allMovingGlypsLink = findChildrenLinks(targetGlyph, this);
-        let allMovingGlyps = getGlyphsArray(allMovingGlypsLink, this.props.glyphs);
+        let allMovingGlyphsLink = findChildrenLinks(targetGlyph, this.props.content);
+        let allMovingGlyphs = JSON.parse(JSON.stringify(getGlyphsArray(allMovingGlyphsLink, this.props.content.glyphs)));
 
         this.isMoovingTree = true;
 
         this.setState({onMouseMove: (e) => {
            let shiftX = startCoords.left - e.clientX;
            let shiftY = startCoords.top - e.clientY;
-           
-           allMovingGlyps.forEach((glyph) => {
-               let fantomGlyph = Object.assign({}, glyph);
-
-               fantomGlyph.t = glyph.t - shiftY;
-               fantomGlyph.l = glyph.l - shiftX;
-               this.props.moveGlyphTree(fantomGlyph);
+           allMovingGlyphs.forEach((glyph) => {
+               let phantomGlyph = Object.assign({}, glyph);
+               phantomGlyph.t = 100; // glyph.t - shiftY;
+               phantomGlyph.l = 100; // glyph.l - shiftX;
+               this.props.moveGlyphTree (phantomGlyph);
            });
         }});
 
@@ -120,6 +126,10 @@ class Context extends Component {
             }
         });
     }
+
+
+
+
 
     onConnectionClick(targetConnection, e) {
         let ConnectionMenu = this.refs.connectionMenu;
@@ -167,17 +177,17 @@ class Context extends Component {
                 <GlyphMenu ref="glyphMenu" moveTree={this.moveTree} />
                 <ConnectionMenu ref="connectionMenu"
                                 removeConnection={this.removeConnection} />
-                {Object.keys(this.props.glyphs).map((glyphKey, index)=>
+                {Object.keys(this.props.content.glyphs).map((glyphKey, index)=>
                     <Glyph
                         key={index}
-                        glyph={this.props.glyphs[glyphKey]}
+                        glyph={this.props.content.glyphs[glyphKey]}
                         moveGlyph={this.moveGlyph} />
                 )}
-                {this.props.connections.map((connection, index)=>
+                {this.props.content.connections.map((connection, index)=>
                     <Connection
                         key={index}
-                        from={this.props.glyphs[connection.fromLink]}
-                        to={this.props.glyphs[connection.toLink]}
+                        from={this.props.content.glyphs[connection.fromLink]}
+                        to={this.props.content.glyphs[connection.toLink]}
                         onClick={this.onConnectionClick}
                         connection={connection} />
                 )}

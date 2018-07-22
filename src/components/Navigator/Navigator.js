@@ -1,23 +1,38 @@
 import React from 'react';
 import './Navigator.css';
 import Context from '../Context';
+import {connect} from 'react-redux';
 import Menu from '../Menu';
-import contextsService from '../../services/contexts';
 
 class Navigator extends React.Component {
 
-    componentDidMount() {
-        contextsService.openDefault();
+    constructor (props) {
+        console.log("constructor", props);
+        super(props); // ? What for ?
     }
+
+    componentDidUpdate() {}
 
     render () {
         return (
             <div className="Navigator">
                 <Menu />
-                <Context />
+                <Context content={this.props.context} />
             </div>
         )
     }
 }
 
-export default Navigator;
+ export default Navigator;
+
+
+/*
+function mapStateToProps(state) {
+    console.log("state", state);
+    return state;
+}
+export default connect(
+    mapStateToProps,
+    {} /!*matchDispatchToProps*!/
+)(Navigator);
+*/

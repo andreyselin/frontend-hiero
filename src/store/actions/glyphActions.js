@@ -36,7 +36,7 @@ export const setGlyphBounds = (glyph) => {
 
 
 /*-moveGlyphAction-*/
-export const moveGlyph = (glyph) => {
+export const moveGlyph = glyph => {
     return {
         type: actionTypes.glyph.move,
         payload: glyph
