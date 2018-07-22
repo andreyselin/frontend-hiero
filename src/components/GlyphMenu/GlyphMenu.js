@@ -14,6 +14,7 @@ class GlyphMenu extends Component {
         this.moveTree = this.moveTree.bind(this);
         this.editGlyph = this.editGlyph.bind(this);
         this.removeGlyph = this.removeGlyph.bind(this);
+        this.toggleClasses = this.toggleClasses.bind(this);
     }
 
     moveTree(e) {
@@ -23,13 +24,38 @@ class GlyphMenu extends Component {
 
     editGlyph(e) {
         e.preventDefault();
-        console.log('edit');
+        this.toggleClasses();
     }
 
     removeGlyph(e) {
         e.preventDefault();
-        console.log('delete', this.props);
         this.props.removeGlyph(this.params.targetGlyph);
+    }
+
+    changeGlyphDirection(direction, e) {
+        e.preventDefault();
+        let targetGlyphClassList = this.params.targetGlyph.refs.root.classList;
+        
+        targetGlyphClassList.remove('GlyphHorizontal--column', 'GlyphHorizontal',
+                                     'GlyphHorizontal--reverse', 'GlyphHorizontal--column-reverse');
+        if (direction === 'top') {
+            targetGlyphClassList.add('GlyphHorizontal--column');
+        } else if (direction === 'left') {
+            targetGlyphClassList.add('GlyphHorizontal');
+        } else if (direction === 'right') {
+            targetGlyphClassList.add('GlyphHorizontal--reverse');
+        } else if (direction === 'bottom') {
+            targetGlyphClassList.add('GlyphHorizontal--column-reverse');
+        }
+        this.toggleClasses();
+    }
+
+    toggleClasses() {
+        let mainGlyphMenu = this.refs.mainGlyphMenu;
+        let directionGlyphMenu = this.refs.directionGlyphMenu;
+
+        mainGlyphMenu.classList.toggle('glyph-menu__list--hidden');
+        directionGlyphMenu.classList.toggle('glyph-menu__list--hidden');
     }
 
     render () {
@@ -40,7 +66,7 @@ class GlyphMenu extends Component {
                     left: this.params.left,
                     display: this.params.display
                 }}>
-                <ul className = "glyph-menu__list">
+                <ul ref="mainGlyphMenu" className = "glyph-menu__list">
                     <li className = "glyph-menu__item">
                         <a className = "glyph-menu__link"
                            onClick = { this.moveTree }
@@ -49,7 +75,7 @@ class GlyphMenu extends Component {
                         </a>
                     </li>
                     <li className = "glyph-menu__item">
-                        <a className = "glyph-menu__link"
+                        <a className = "glyph-menu__link glyph-menu__link--edit"
                            onClick = { this.editGlyph }
                            href="Edit">
                             Edit glyph
@@ -60,6 +86,36 @@ class GlyphMenu extends Component {
                            onClick = { this.removeGlyph }
                            href="Delete">
                             Delete glyph
+                        </a>
+                    </li>
+                </ul>
+                <ul ref="directionGlyphMenu" className = "glyph-menu__list glyph-menu__list--hidden">
+                    <li className = "glyph-menu__item">
+                        <a className = "glyph-menu__link"
+                           onClick = { this.changeGlyphDirection.bind(this, 'top') }
+                           href="Move">
+                            image top
+                        </a>
+                    </li>
+                    <li className = "glyph-menu__item">
+                        <a className = "glyph-menu__link"
+                           onClick = { this.changeGlyphDirection.bind(this, 'left') }
+                           href="Edit">
+                            imege left
+                        </a>
+                    </li>
+                    <li className = "glyph-menu__item">
+                        <a className = "glyph-menu__link"
+                           onClick = { this.changeGlyphDirection.bind(this, 'right') }
+                           href="Delete">
+                            image right
+                        </a>
+                    </li>
+                    <li className = "glyph-menu__item">
+                        <a className = "glyph-menu__link"
+                           onClick = { this.changeGlyphDirection.bind(this, 'bottom') }
+                           href="Delete">
+                            image bottom
                         </a>
                     </li>
                 </ul>
