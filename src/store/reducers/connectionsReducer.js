@@ -20,12 +20,12 @@ export default function connections(state = [], action) {
         //console.log('Connection reducer', action.payload)
         //console.log('state ', state)
         let newState = [...state];
-        let linkId = action.payload
+        let linkId = action.payload;
         let removeConnectionPosition = newState.findIndex((item) => {
-            return item.link === linkId
-        })
+            return item.link === linkId;
+        });
 
-        newState.splice(removeConnectionPosition, 1)
+        newState.splice(removeConnectionPosition, 1);
 
         return [
             ...newState

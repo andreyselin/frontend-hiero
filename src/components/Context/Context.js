@@ -4,7 +4,7 @@ import Connection from '../Connection';
 import "./Context.css";
 import {connect} from 'react-redux';
 import classNames from 'classnames';
-import {moveGlyph, moveGlyphTree, removeGlyph} from '../../store/actions/glyphActions';
+import {moveGlyph, removeGlyph} from '../../store/actions/glyphActions';
 import {bindActionCreators} from 'redux';
 import GlyphMenu from '../GlyphMenu';
 import ConnectionMenu from '../ConnectionMenu';
@@ -13,17 +13,15 @@ import { removeConnection } from '../../store/actions/connectionActions';
 
 function mapStateToProps(state) {
     return {
-        glyphs: state.context.glyphs,
-        connections: state.context.connections,
+        glyphs:        state.activeContext.glyphs,
+        connections:   state.activeContext.connections,
         addConnection: state.app.addConnection
     }
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators(
-        {
+    return bindActionCreators({
             moveGlyph: moveGlyph,
-            moveGlyphTree: moveGlyphTree,
             removeGlyph: removeGlyph,
             removeConnection: removeConnection
         },
@@ -35,31 +33,35 @@ class Context extends Component {
     constructor (props) {
         super(props);
         this.state = {};
-        setTimeout(()=>{console.log(this.props)}, 1000);
-        this.isMoovingTree = false;
-        this.moveGlyph = this.moveGlyph.bind(this);
-        this.moveTree = this.moveTree.bind(this);
+        this.isMovingTree = false;
+        this.glyphOnMouseDown = this.glyphOnMouseDown.bind(this);
+        //this.moveTree = this.moveTree.bind(this);
         this.onConnectionClick = this.onConnectionClick.bind(this);
         this.onConnectionClick = this.onConnectionClick.bind(this);
         this.removeConnection = this.removeConnection.bind(this);
         this.removeGlyph = this.removeGlyph.bind(this);
     }
 
-    moveGlyph(glyph, event) {
-        if (!this.isMoovingTree) {
+
+
+
+    glyphOnMouseDown(glyph, event) {
+
+        if (!this.isMovingTree) {
             let $this = this;
-            let shiftX = event.clientX - glyph.props.glyph.l;
-            let shiftY = event.clientY - glyph.props.glyph.t;
-    
+            let shiftX = event.clientX - glyph.l;
+            let shiftY = event.clientY - glyph.t;
+            let mouseDownTime = event.timeStamp;
+
             $this.setState({
-                onMouseUp: function() {
-                    let checkMenuClickFinish = Date.now();
-    
-                    if (checkMenuClickFinish - glyph.checkMenuClickStart < 150) {
+                onMouseUp: function(eventUp) {
+
+                    if (eventUp.timeStamp - 150 < mouseDownTime) {
+
                         let glyphMenu = $this.refs.glyphMenu;
-                        
-                        glyphMenu.params.top = glyph.props.glyph.t;
-                        glyphMenu.params.left = glyph.props.glyph.l;
+
+                        glyphMenu.params.top  = /*glyph.props.*/glyph.t;
+                        glyphMenu.params.left = /*glyph.props.*/glyph.l;
                         glyphMenu.params.display = 'block';
                         glyphMenu.params.targetGlyph = glyph;
                        
@@ -89,39 +91,38 @@ class Context extends Component {
                     let coordsLeft = e.clientX - shiftX;
                     let coordsTop = e.clientY - shiftY;
     
-                    glyph.props.glyph.t = coordsTop;
-                    glyph.props.glyph.l = coordsLeft;
+                    glyph.t = coordsTop;
+                    glyph.l = coordsLeft;
                     $this.props.moveGlyph(glyph);
                 }
             });
-        }        
+        } else {
+            // this.moveTree(glyph); // Tmp for debug
+        }
     }
 
 
 
 
-
-    moveTree(targetGlyph) {
-        // console.log("--!--");
-        // return;
+    /*moveTree*/tmp(targetGlyph) {
 
         let startCoords = {
-            left: targetGlyph.props.glyph.l,
-            top: targetGlyph.props.glyph.t 
+            left: targetGlyph.l,
+            top:  targetGlyph.t
         };
-        let allMovingGlyphsLink = findChildrenLinks(targetGlyph, this.props.content);
-        let allMovingGlyphs = JSON.parse(JSON.stringify(getGlyphsArray(allMovingGlyphsLink, this.props.content.glyphs)));
+        let allMovingGlyphsLink = findChildrenLinks(targetGlyph, this.props.connections);
+        let allMovingGlyphs = JSON.parse(JSON.stringify(getGlyphsArray(allMovingGlyphsLink, this.props.glyphs)));
 
-        this.isMoovingTree = true;
+        // this.isMovingTree = true;
 
         this.setState({onMouseMove: (e) => {
            let shiftX = startCoords.left - e.clientX;
            let shiftY = startCoords.top - e.clientY;
            allMovingGlyphs.forEach((glyph) => {
                let phantomGlyph = Object.assign({}, glyph);
-               phantomGlyph.t = 100; // glyph.t - shiftY;
-               phantomGlyph.l = 100; // glyph.l - shiftX;
-               this.props.moveGlyphTree (phantomGlyph);
+               phantomGlyph.t = glyph.t - shiftY;
+               phantomGlyph.l = glyph.l - shiftX;
+               this.props.moveGlyph (phantomGlyph);
            });
         }});
 
@@ -129,7 +130,7 @@ class Context extends Component {
             onMouseUp: (e) => {
                 this.setState({onMouseDown: null});
                 this.setState({onMouseMove: null});
-                this.isMoovingTree = false;
+                // this.isMovingTree = false;
             }
         });
     }
@@ -162,6 +163,9 @@ class Context extends Component {
         });
     }
 
+
+
+
     removeConnection(e, targetConnection) {
         let ConnectionMenu = this.refs.connectionMenu;
 
@@ -174,6 +178,9 @@ class Context extends Component {
         this.setState({mouseClick: null});
     }
 
+
+
+
     removeGlyph(glyph) {
         let targetGlyph = glyph.props.glyph.link;
         let removeConnections = findGlyphsConections(targetGlyph, this);
@@ -184,6 +191,9 @@ class Context extends Component {
         this.props.removeGlyph(targetGlyph);
     }
 
+
+
+
     render () {
         return (
             <div className={ classNames("Context", this.props.addConnection.mode) }
@@ -191,24 +201,35 @@ class Context extends Component {
                  onClick={this.state.mouseClick}
                  onMouseDown={this.state.onMouseDown}
                  onMouseUp={this.state.onMouseUp}>                 
-                <GlyphMenu ref="glyphMenu" moveTree={this.moveTree}
-                                           removeGlyph={this.removeGlyph} />
-                <ConnectionMenu ref="connectionMenu"
-                                removeConnection={this.removeConnection} />
-                {Object.keys(this.props.content.glyphs).map((glyphKey, index)=>
+
+
+                <GlyphMenu
+                    ref="glyphMenu"
+                    removeGlyph={this.removeGlyph} />
+
+
+                <ConnectionMenu
+                    ref="connectionMenu"
+                    removeConnection={this.removeConnection} />
+
+
+                {Object.keys(this.props.glyphs).map((glyphKey, index)=>
                     <Glyph
                         key={index}
-                        glyph={this.props.content.glyphs[glyphKey]}
-                        moveGlyph={this.moveGlyph} />
+                        glyph={this.props.glyphs[glyphKey]}
+                        glyphOnMouseDown={this.glyphOnMouseDown} />
                 )}
-                {this.props.content.connections.map((connection, index)=>
+
+
+                {this.props.connections.map((connection, index)=>
                     <Connection
                         key={index}
-                        from={this.props.content.glyphs[connection.fromLink]}
-                        to={this.props.content.glyphs[connection.toLink]}
+                        from={this.props.glyphs[connection.fromLink]}
+                        to={this.props.glyphs[connection.toLink]}
                         onClick={this.onConnectionClick}
                         connection={connection} />
                 )}
+
             </div>
         )
     }

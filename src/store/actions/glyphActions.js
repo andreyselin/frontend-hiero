@@ -1,6 +1,6 @@
 import actionTypes from '../../constants/actionTypes';
 
-/*-addGlyphAction-*/
+
 export const addGlyph = (newGlyph)=> {
 
     let newLink = Math.random().toString(36).slice(2);
@@ -18,10 +18,8 @@ export const addGlyph = (newGlyph)=> {
         }
     };
 };
-/*-/addGlyphAction-*/
 
 
-/*-setGlyphBounds-*/
 export const setGlyphBounds = (glyph) => {
     return {
         type: actionTypes.glyph.setBounds,
@@ -32,17 +30,16 @@ export const setGlyphBounds = (glyph) => {
         }
     };
 };
-/*-/setGlyphBounds-*/
 
 
-/*-moveGlyphAction-*/
 export const moveGlyph = glyph => {
     return {
         type: actionTypes.glyph.move,
+        navigatorIndex: 0,
         payload: glyph
     }
 };
-/*-/moveGlyphAction-*/
+
 
 export const moveGlyphTree = (glyph) => {
     return {
@@ -51,7 +48,8 @@ export const moveGlyphTree = (glyph) => {
     }
 };
 
-export const updageAllGlyphs = (newGlyphs) => { //
+
+export const updateAllGlyphs = (newGlyphs) => { //
     return {
         type: actionTypes.glyph.updateAll,
         payload: newGlyphs

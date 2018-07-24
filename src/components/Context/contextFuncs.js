@@ -6,10 +6,10 @@ function getGlyphsArray(glyphNames, glyphsStore) {
     return result;
 }
 
-function findChildrenLinks(targetGlyph, context) {
-    let movedGlyphLink = targetGlyph.props.glyph.link;
+function findChildrenLinks(targetGlyph, connections) {
+    let movedGlyphLink = targetGlyph.link;
     // console.log("movedGlyphLink", movedGlyphLink);
-    let allConnections = context.connections;
+    let allConnections = connections;
     let allMovingChildren = [];
 
     searchForChildren(movedGlyphLink, allConnections);

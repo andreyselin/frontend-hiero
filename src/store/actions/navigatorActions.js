@@ -5,9 +5,10 @@ export const assignNavigatorAContext = params => {
     return {
         type: actionTypes.navigator.assignContext,
         payload: {
-            context: params.context,
+            contextIndex: params.contextIndex,
             navigatorIndex: params.navigatorIndex,
             /*
+            // Size, position of the window (NOT CONTEXT!!!)
             navigatorProps: {
                 l: 10,
                 t: 10,
@@ -16,5 +17,12 @@ export const assignNavigatorAContext = params => {
             }
             */
         }
+    };
+};
+
+export const setNavigatorActive = indexToSetActive => {
+    return {
+        type: actionTypes.app.setNavigatorActive,
+        payload: indexToSetActive
     };
 };

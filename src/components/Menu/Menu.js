@@ -9,8 +9,8 @@ import './Menu.css';
 
 function mapStateToProps(state) {
     return {
-        glyphs: state.context.glyphs,
-        connections: state.context.connections
+        glyphs:      {}, //state.navigators[0].context.glyphs,
+        connections: []  //state.navigators[0].context.connections
     }
 }
 

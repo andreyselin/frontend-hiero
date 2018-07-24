@@ -23,9 +23,9 @@ class Glyph extends Component {
         });
     }
 
-    onMouseDown(event) {
+    onMouseDown (event) {
         this.checkMenuClickStart = Date.now();
-        this.props.moveGlyph(this, event);
+        this.props.glyphOnMouseDown(this.props.glyph, event);
     }
 
     chooseConnector(connectorType) {

@@ -21,9 +21,8 @@ class App extends React.Component {
     render () {
         return (
             <div className="Navigation"> {
-                this.props.navigators.map((aNavigator, index) => <Navigator
+                this.props.navigators.list.map((aNavigator, index) => <Navigator
                     key={index}
-                    context={aNavigator.context}
                     /> )
             }</div>
         )

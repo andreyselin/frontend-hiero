@@ -34,7 +34,7 @@ export const removeConnection = (connection) => {
     };
 };
 
-export const updateAllConnections = (newConnections)=> {
+export const updateAllConnections = (newConnections) => {
     return {
         type: actionTypes.connection.updateAll,
         payload: newConnections
