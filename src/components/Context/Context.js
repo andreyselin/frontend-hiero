@@ -33,9 +33,9 @@ class Context extends Component {
     constructor (props) {
         super(props);
         this.state = {};
-        this.isMovingTree = false;
+        this.isMovingTree = true;
+        //this.isMovingTree = false;
         this.glyphOnMouseDown = this.glyphOnMouseDown.bind(this);
-        //this.moveTree = this.moveTree.bind(this);
         this.onConnectionClick = this.onConnectionClick.bind(this);
         this.onConnectionClick = this.onConnectionClick.bind(this);
         this.removeConnection = this.removeConnection.bind(this);
@@ -43,16 +43,23 @@ class Context extends Component {
     }
 
 
+    showMenu(event){}
+
 
 
     glyphOnMouseDown(glyph, event) {
 
-        if (!this.isMovingTree) {
-            let $this = this;
-            let shiftX = event.clientX - glyph.l;
-            let shiftY = event.clientY - glyph.t;
-            let mouseDownTime = event.timeStamp;
 
+        let shiftX = event.clientX - glyph.l;
+        let shiftY = event.clientY - glyph.t;
+
+
+        if (!this.isMovingTree) {
+
+            // Showing menu on
+            // immediate mouse up
+            let $this = this;
+            let mouseDownTime = event.timeStamp;
             $this.setState({
                 onMouseUp: function(eventUp) {
 
@@ -60,15 +67,15 @@ class Context extends Component {
 
                         let glyphMenu = $this.refs.glyphMenu;
 
-                        glyphMenu.params.top  = /*glyph.props.*/glyph.t;
-                        glyphMenu.params.left = /*glyph.props.*/glyph.l;
+                        glyphMenu.params.top  = glyph.t;
+                        glyphMenu.params.left = glyph.l;
                         glyphMenu.params.display = 'block';
                         glyphMenu.params.targetGlyph = glyph;
-                       
+
                         $this.setState({
-                            mouseClick: (e) => {                                
+                            mouseClick: (e) => {
                                 let targetClassList = e.target.classList;
-                                
+
                                 if ((!targetClassList.contains('GlyphSpan')) && (!targetClassList.contains('glyph-menu__link--edit'))) {
                                     glyphMenu.params.display = 'none';
                                     glyphMenu.params.targetGlyph = null;
@@ -80,24 +87,51 @@ class Context extends Component {
                             }
                         });
                     }
-    
+
                     $this.setState({onMouseMove: null});
                     glyph.onMouseUp = null;
                 }
             });
-    
+
+
+            // Move single glyph
             $this.setState({
                 onMouseMove: function(e) {
-                    let coordsLeft = e.clientX - shiftX;
-                    let coordsTop = e.clientY - shiftY;
-    
-                    glyph.t = coordsTop;
-                    glyph.l = coordsLeft;
+                    glyph.t = e.clientY - shiftY;
+                    glyph.l = e.clientX - shiftX;
                     $this.props.moveGlyph(glyph);
                 }
             });
+
+
         } else {
-            // this.moveTree(glyph); // Tmp for debug
+
+
+            let startCoords = {
+                left: glyph.l,
+                top:  glyph.t
+            };
+
+            let allMovingGlyphsLink = findChildrenLinks(glyph, this.props.connections);
+            let allMovingGlyphs = JSON.parse(JSON.stringify(getGlyphsArray(allMovingGlyphsLink, this.props.glyphs)));
+
+            this.setState({onMouseMove: (e) => {
+                let treeShiftX = startCoords.left - e.clientX;
+                let treeShiftY = startCoords.top - e.clientY;
+                allMovingGlyphs.forEach((treeGlyph) => {
+                    let phantomGlyph = Object.assign({}, treeGlyph);
+                    phantomGlyph.t = treeGlyph.t - treeShiftY - shiftY;
+                    phantomGlyph.l = treeGlyph.l - treeShiftX - shiftX;
+                    this.props.moveGlyph (phantomGlyph);
+                });
+            }});
+
+            this.setState({
+                onMouseUp: (e) => {
+                    this.setState({onMouseDown: null});
+                    this.setState({onMouseMove: null});
+                }
+            });
         }
     }
 
@@ -106,33 +140,7 @@ class Context extends Component {
 
     /*moveTree*/tmp(targetGlyph) {
 
-        let startCoords = {
-            left: targetGlyph.l,
-            top:  targetGlyph.t
-        };
-        let allMovingGlyphsLink = findChildrenLinks(targetGlyph, this.props.connections);
-        let allMovingGlyphs = JSON.parse(JSON.stringify(getGlyphsArray(allMovingGlyphsLink, this.props.glyphs)));
 
-        // this.isMovingTree = true;
-
-        this.setState({onMouseMove: (e) => {
-           let shiftX = startCoords.left - e.clientX;
-           let shiftY = startCoords.top - e.clientY;
-           allMovingGlyphs.forEach((glyph) => {
-               let phantomGlyph = Object.assign({}, glyph);
-               phantomGlyph.t = glyph.t - shiftY;
-               phantomGlyph.l = glyph.l - shiftX;
-               this.props.moveGlyph (phantomGlyph);
-           });
-        }});
-
-        this.setState({
-            onMouseUp: (e) => {
-                this.setState({onMouseDown: null});
-                this.setState({onMouseMove: null});
-                // this.isMovingTree = false;
-            }
-        });
     }
 
 

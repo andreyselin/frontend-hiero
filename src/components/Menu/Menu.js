@@ -56,21 +56,40 @@ class Menu extends Component {
     render() {
         return (
             <div className="Menu">
-                {/*
-                <button onClick={this.showStore}>Show store</button>
-                <button onClick={this.showStore}>Add connection</button>
-                */}
-                <input
-                    type="text"
-                    value={this.state.newGlyphLabel}
-                    onChange={ this.handleChange.bind(this) }
-                    placeholder="Label for new glyph"
-                    />
-                <button onClick={this.addGlyph}>Add glyph</button>
-                <span> - - - </span>
-                <button onClick={this.addConnection}>Add connection</button>
-                <span> - - - </span>
-                <button onClick={this.showStore}>Show store</button>
+                <div className="Menu_block">
+                    <div className="Menu_block_header">Add new glyph</div>
+                    <div className="Menu_block_row">
+                        <input
+                            type="text"
+                            value={this.state.newGlyphLabel}
+                            onChange={ this.handleChange.bind(this) }
+                            placeholder="Label for new glyph"
+                            />
+                    </div>
+                    <div className="Menu_block_row">
+                        <button onClick={this.addGlyph}>Add glyph</button>
+                    </div>
+                    <div className="Menu_block_row">
+                        <button onClick={this.addConnection}>Add connection</button>
+                    </div>
+                </div>
+
+
+                <div className="Menu_block">
+                    <div className="Menu_block_header">Save context</div>
+                    <div className="Menu_block_row">
+                        <button onClick={this.showStore}>Show store</button>
+                    </div>
+                </div>
+
+
+                <div className="Menu_block">
+                    <div className="Menu_block_header">Open contexts</div>
+                    <ul class="Menu_contexts-list">
+                        <li>111</li>
+                        <li>222</li>
+                    </ul>
+                </div>
             </div>
         );
     }

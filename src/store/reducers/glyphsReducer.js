@@ -40,22 +40,6 @@ export default function glyphs(state = {}, action) {
 
 
 
-    // Todo: delete as a duplicate
-    if (action.type === actionTypes.glyph.moveTree) {
-
-        return {
-            ...state,
-            [action.payload.link]:{
-                ...state[action.payload.link],
-                t: action.payload.t,
-                l: action.payload.l
-            }
-        }
-    }
-
-
-
-
     if (action.type === actionTypes.glyph.updateAll) {
         return action.payload;
     }
