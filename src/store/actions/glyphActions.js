@@ -1,21 +1,21 @@
 import actionTypes from '../../constants/actionTypes';
-
+import Glyph from '../../classes/glyph';
 
 export const addGlyph = (newGlyph)=> {
 
-    let newLink = Math.random().toString(36).slice(2);
+    console.log("img:    newGlyph.imgSrc",newGlyph.imgSrc);
 
     return {
         type: actionTypes.glyph.add,
-        payload: {
-            link:newLink,
+        payload: new Glyph({
             w: 50,
             h: 50,
             l: 400,
             t: 300,
-            label: newGlyph.label || 'default',
-            img: null
-        }
+            header: newGlyph.header,
+            label:  newGlyph.label,
+            img:    newGlyph.imgSrc ? {src: newGlyph.imgSrc} : null
+        })
     };
 };
 

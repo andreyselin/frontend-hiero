@@ -64,7 +64,7 @@ class Glyph extends Component {
 
                 {this.props.glyph.img && (
                     <div className='GlyphImg'>
-                        <div style={{backgroundImage: `URL(${this.props.glyph.img})`}} alt="Glyph" className='Glyph__img' />
+                        <div style={{backgroundImage: `URL(${this.props.glyph.img.src})`}} alt="Glyph" className='Glyph__img' />
                     </div>
                 )}
                 <div className='GlyphContent'>

@@ -31,17 +31,26 @@ class Menu extends Component {
         super(props);
         this.addGlyph      = this.addGlyph.bind(this);
         this.addConnection = this.addConnection.bind(this);
+        this.handleChange  = this.handleChange.bind(this);
         this.state = {
-            newGlyphLabel: "привет"
+            newGlyphImgSrc: "",
+            newGlyphHeader: "Заголовок",
+            newGlyphLabel:  "Подзаголовок"
         };
     }
 
-    handleChange (event) {
-        this.setState({newGlyphLabel:event.target.value});
+    handleChange (target) {
+
+        return event=>this.setState({[target]:event.target.value});
+
     }
 
     addGlyph() {
-        this.props.addGlyph({label:this.state.newGlyphLabel});
+        this.props.addGlyph({
+            imgSrc: this.state.newGlyphImgSrc,
+            header: this.state.newGlyphHeader,
+            label:  this.state.newGlyphLabel
+        });
     }
 
     addConnection() {
@@ -59,10 +68,29 @@ class Menu extends Component {
                 <div className="Menu_block">
                     <div className="Menu_block_header">Add new glyph</div>
                     <div className="Menu_block_row">
+                        Image source:<br />
+                        <input
+                            type="text"
+                            value={this.state.newGlyphImgSrc}
+                            onChange={ this.handleChange('newGlyphImgSrc') }
+                            placeholder="Image source"
+                            />
+                    </div>
+                    <div className="Menu_block_row">
+                        Glyph header:<br />
+                        <input
+                            type="text"
+                            value={this.state.newGlyphHeader}
+                            onChange={ this.handleChange('newGlyphHeader') }
+                            placeholder="Header for new glyph"
+                            />
+                    </div>
+                    <div className="Menu_block_row">
+                        Glyph label:<br />
                         <input
                             type="text"
                             value={this.state.newGlyphLabel}
-                            onChange={ this.handleChange.bind(this) }
+                            onChange={ this.handleChange('newGlyphLabel') }
                             placeholder="Label for new glyph"
                             />
                     </div>
@@ -85,7 +113,7 @@ class Menu extends Component {
 
                 <div className="Menu_block">
                     <div className="Menu_block_header">Open contexts</div>
-                    <ul class="Menu_contexts-list">
+                    <ul className="Menu_contexts-list">
                         <li>111</li>
                         <li>222</li>
                     </ul>
