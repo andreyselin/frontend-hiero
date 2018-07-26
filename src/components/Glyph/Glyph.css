@@ -9,6 +9,7 @@
     align-items: center;
     cursor: move;
     text-align:center;
+    font-size:14px;
 
 }
 
@@ -38,6 +39,11 @@
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 5px;
+}
+
+.GlyphHeader {
+    font-size: 18px;
+    padding: 10px;
 }
 
 /*
