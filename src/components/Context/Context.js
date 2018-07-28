@@ -4,12 +4,12 @@ import Connection from '../Connection';
 import "./Context.css";
 import {connect} from 'react-redux';
 import classNames from 'classnames';
-import {moveGlyph, removeGlyph} from '../../store/actions/glyphActions';
+import {moveGlyph, removeGlyph, setActiveGlyph} from '../../store/actions/glyphActions';
 import {bindActionCreators} from 'redux';
-import GlyphMenu from '../GlyphMenu';
+//import GlyphMenu from '../GlyphMenu';
 import ConnectionMenu from '../ConnectionMenu';
 import {getGlyphsArray, findChildrenLinks, findGlyphsConections} from './contextFuncs';
-import { removeConnection } from '../../store/actions/connectionActions';
+import {removeConnection} from '../../store/actions/connectionActions';
 
 function mapStateToProps(state) {
     return {
@@ -23,7 +23,8 @@ function matchDispatchToProps(dispatch) {
     return bindActionCreators({
             moveGlyph: moveGlyph,
             removeGlyph: removeGlyph,
-            removeConnection: removeConnection
+            removeConnection: removeConnection,
+            setActiveGlyph: setActiveGlyph
         },
         dispatch
     );
@@ -39,13 +40,12 @@ class Context extends Component {
         this.onConnectionClick = this.onConnectionClick.bind(this);
         this.onConnectionClick = this.onConnectionClick.bind(this);
         this.removeConnection = this.removeConnection.bind(this);
+        this.setActiveGlyphInContext = this.setActiveGlyphInContext.bind(this);
         this.removeGlyph = this.removeGlyph.bind(this);
     }
 
 
     showMenu(event){}
-
-
 
     glyphOnMouseDown(glyph, event) {
 
@@ -59,11 +59,11 @@ class Context extends Component {
             // Showing menu on
             // immediate mouse up
             let $this = this;
-            let mouseDownTime = event.timeStamp;
+            // let mouseDownTime = event.timeStamp;
             $this.setState({
                 onMouseUp: function(eventUp) {
 
-                    if (eventUp.timeStamp - 150 < mouseDownTime) {
+                    /* if (eventUp.timeStamp - 150 < mouseDownTime) {
 
                         let glyphMenu = $this.refs.glyphMenu;
 
@@ -86,7 +86,7 @@ class Context extends Component {
                                 }
                             }
                         });
-                    }
+                    } */
 
                     $this.setState({onMouseMove: null});
                     glyph.onMouseUp = null;
@@ -97,8 +97,6 @@ class Context extends Component {
             // Move single glyph
             $this.setState({
                 onMouseMove: function(e) {
-                    glyph.t = e.clientY - shiftY;
-                    glyph.l = e.clientX - shiftX;
                     $this.props.moveGlyph(glyph);
                 }
             });
@@ -135,17 +133,9 @@ class Context extends Component {
         }
     }
 
-
-
-
     /*moveTree*/tmp(targetGlyph) {
 
-
     }
-
-
-
-
 
     onConnectionClick(targetConnection, e) {
         let ConnectionMenu = this.refs.connectionMenu;
@@ -171,9 +161,6 @@ class Context extends Component {
         });
     }
 
-
-
-
     removeConnection(e, targetConnection) {
         let ConnectionMenu = this.refs.connectionMenu;
 
@@ -186,9 +173,6 @@ class Context extends Component {
         this.setState({mouseClick: null});
     }
 
-
-
-
     removeGlyph(glyph) {
         let targetGlyph = glyph.props.glyph.link;
         let removeConnections = findGlyphsConections(targetGlyph, this);
@@ -199,8 +183,10 @@ class Context extends Component {
         this.props.removeGlyph(targetGlyph);
     }
 
-
-
+    setActiveGlyphInContext(glyph) {
+        // console.log('go up', glyph);
+        this.props.setActiveGlyph(glyph);
+    }
 
     render () {
         return (
@@ -211,9 +197,9 @@ class Context extends Component {
                  onMouseUp={this.state.onMouseUp}>                 
 
 
-                <GlyphMenu
+                {/* <GlyphMenu
                     ref="glyphMenu"
-                    removeGlyph={this.removeGlyph} />
+                    removeGlyph={this.removeGlyph} /> */}
 
 
                 <ConnectionMenu
@@ -225,7 +211,8 @@ class Context extends Component {
                     <Glyph
                         key={index}
                         glyph={this.props.glyphs[glyphKey]}
-                        glyphOnMouseDown={this.glyphOnMouseDown} />
+                        glyphOnMouseDown={this.glyphOnMouseDown}
+                        setActiveGlyphInContext={this.setActiveGlyphInContext} />
                 )}
 
 

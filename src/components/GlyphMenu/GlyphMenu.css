@@ -1,14 +1,6 @@
 .glyph-menu{
-    position: absolute;
     width: max-content;
     height: max-content;
-    left: 5%;
-    top: 5%;
-    background-color: coral;
-    padding: 5px;
-    border-radius: 5px;
-    display: none;
-    z-index: 50;
 }
 
 .glyph-menu__list{
@@ -29,4 +21,8 @@
 
 .glyph-menu__link:hover{
     background-color: yellow;
+}
+
+.glyph-menu__link--remove:hover{
+    background-color: red;
 }

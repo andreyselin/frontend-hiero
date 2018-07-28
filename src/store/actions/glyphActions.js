@@ -54,3 +54,10 @@ export const removeGlyph = (glyph) => {
         payload: glyph
     }
 };
+
+export const setActiveGlyph = (glyph) => {
+    return {
+        type: actionTypes.glyph.setActive,
+        payload: glyph
+    }
+};

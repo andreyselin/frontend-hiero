@@ -4,13 +4,18 @@ import {connect} from 'react-redux';
 import Store from '../../store/store.js';
 import {addGlyph} from '../../store/actions/glyphActions';
 import {addConnectionTurnOn} from '../../store/actions/connectionActions';
+import {removeGlyph} from '../../store/actions/glyphActions';
+import {findGlyphsConections} from '../Context/contextFuncs';
+import {removeConnection} from '../../store/actions/connectionActions';
+import GlyphMenu from '../GlyphMenu/GlyphMenu';
 import './Menu.css';
 
 
 function mapStateToProps(state) {
     return {
         glyphs:      {}, //state.navigators[0].context.glyphs,
-        connections: []  //state.navigators[0].context.connections
+        connections: state.activeContext.connections,
+        activeGlyph: state.activeContext.activeGlyph
     }
 }
 
@@ -20,6 +25,8 @@ function matchDispatchToProps(dispatch) {
         {
             addGlyph: addGlyph,
             addConnectionTurnOn: addConnectionTurnOn,
+            removeGlyph: removeGlyph,
+            removeConnection: removeConnection
         },
         dispatch
     );
@@ -32,6 +39,7 @@ class Menu extends Component {
         this.addGlyph      = this.addGlyph.bind(this);
         this.addConnection = this.addConnection.bind(this);
         this.handleChange  = this.handleChange.bind(this);
+        this.removeGlyph = this.removeGlyph.bind(this);
         this.state = {
             newGlyphImgSrc: "",
             newGlyphHeader: "Заголовок",
@@ -62,6 +70,34 @@ class Menu extends Component {
         console.log("a", a);
     }
 
+    changeGlyphDirection(direction, e) {
+        e.preventDefault();
+        let targetGlyphClassList = this.params.targetGlyph.refs.root.classList;
+        
+        targetGlyphClassList.remove('GlyphHorizontal--column', 'GlyphHorizontal',
+                                     'GlyphHorizontal--reverse', 'GlyphHorizontal--column-reverse');
+        if (direction === 'top') {
+            targetGlyphClassList.add('GlyphHorizontal--column');
+        } else if (direction === 'left') {
+            targetGlyphClassList.add('GlyphHorizontal');
+        } else if (direction === 'right') {
+            targetGlyphClassList.add('GlyphHorizontal--reverse');
+        } else if (direction === 'bottom') {
+            targetGlyphClassList.add('GlyphHorizontal--column-reverse');
+        }
+        this.toggleClasses();
+    }
+
+    removeGlyph(glyph) {
+        let targetGlyph = this.props.activeGlyph.glyph.props.glyph.link;
+        let removeConnections = findGlyphsConections(targetGlyph, this);
+        
+        removeConnections.forEach((connection) => {
+            this.props.removeConnection(connection.link);
+        });
+        this.props.removeGlyph(targetGlyph);
+    }
+    
     render() {
         return (
             <div className="Menu">
@@ -117,6 +153,13 @@ class Menu extends Component {
                         <li>111</li>
                         <li>222</li>
                     </ul>
+                </div>
+
+
+                <div className="Menu_block">
+                    <GlyphMenu activeGlyph={this.props.activeGlyph}
+                               removeGlyph={this.removeGlyph}
+                               />
                 </div>
             </div>
         );

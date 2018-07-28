@@ -8,7 +8,8 @@ const actionTypes = {
         setBounds: "GLYPH_SET_BOUNDS",
         move:      "GLYPH_MOVE",
         moveTree:  "GLYPH_MOVE_TREE",
-        updateAll: "GLYPH_UPDATE_ALL"
+        updateAll: "GLYPH_UPDATE_ALL",
+        setActive: "GLYPH_SET_ACTIVE"
     },
     connection: {
         add:{
