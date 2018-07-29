@@ -1,5 +1,4 @@
 .Glyph {
-
     position:absolute;
     z-index: var(--z-glyph);
     transform: translateY(-50%) translateX(-50%);
@@ -10,9 +9,7 @@
     cursor: move;
     text-align:center;
     font-size:14px;
-
 }
-
 .GlyphHorizontal {
     flex-direction: row;
 }
@@ -31,16 +28,11 @@
 .GlyphHorizontal .GlyphContent {
     text-align: left;
 }
-
 .Glyph__img{
     width: 100px;
     height: 100px;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
     border-radius: 5px;
 }
-
 .GlyphHeader {
     font-size: 18px;
     padding: 10px;

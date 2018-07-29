@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 import classNames from 'classnames';
 import {moveGlyph, removeGlyph, setActiveGlyph} from '../../store/actions/glyphActions';
 import {bindActionCreators} from 'redux';
-//import GlyphMenu from '../GlyphMenu';
 import ConnectionMenu from '../ConnectionMenu';
 import {getGlyphsArray, findChildrenLinks, findGlyphsConections} from './contextFuncs';
 import {removeConnection} from '../../store/actions/connectionActions';
@@ -34,8 +33,6 @@ class Context extends Component {
     constructor (props) {
         super(props);
         this.state = {};
-        this.isMovingTree = true;
-        //this.isMovingTree = false;
         this.glyphOnMouseDown = this.glyphOnMouseDown.bind(this);
         this.onConnectionClick = this.onConnectionClick.bind(this);
         this.onConnectionClick = this.onConnectionClick.bind(this);
@@ -44,93 +41,35 @@ class Context extends Component {
         this.removeGlyph = this.removeGlyph.bind(this);
     }
 
-
     showMenu(event){}
 
     glyphOnMouseDown(glyph, event) {
-
-
         let shiftX = event.clientX - glyph.l;
         let shiftY = event.clientY - glyph.t;
+        let allMovingGlyphsLink = findChildrenLinks(glyph, this.props.connections);
+        let allMovingGlyphs = JSON.parse(JSON.stringify(getGlyphsArray(allMovingGlyphsLink, this.props.glyphs)));
+        let startCoords = {
+            left: glyph.l,
+            top:  glyph.t
+        };        
 
-
-        if (!this.isMovingTree) {
-
-            // Showing menu on
-            // immediate mouse up
-            let $this = this;
-            // let mouseDownTime = event.timeStamp;
-            $this.setState({
-                onMouseUp: function(eventUp) {
-
-                    /* if (eventUp.timeStamp - 150 < mouseDownTime) {
-
-                        let glyphMenu = $this.refs.glyphMenu;
-
-                        glyphMenu.params.top  = glyph.t;
-                        glyphMenu.params.left = glyph.l;
-                        glyphMenu.params.display = 'block';
-                        glyphMenu.params.targetGlyph = glyph;
-
-                        $this.setState({
-                            mouseClick: (e) => {
-                                let targetClassList = e.target.classList;
-
-                                if ((!targetClassList.contains('GlyphSpan')) && (!targetClassList.contains('glyph-menu__link--edit'))) {
-                                    glyphMenu.params.display = 'none';
-                                    glyphMenu.params.targetGlyph = null;
-                                    $this.setState({mouseClick: null});
-                                    if (glyphMenu.refs.mainGlyphMenu.classList.contains('glyph-menu__list--hidden')) {
-                                        glyphMenu.toggleClasses();
-                                    }
-                                }
-                            }
-                        });
-                    } */
-
-                    $this.setState({onMouseMove: null});
-                    glyph.onMouseUp = null;
-                }
+        this.setState({onMouseMove: (e) => {
+            let treeShiftX = startCoords.left - e.clientX;
+            let treeShiftY = startCoords.top - e.clientY;
+            allMovingGlyphs.forEach((treeGlyph) => {
+                let phantomGlyph = Object.assign({}, treeGlyph);
+                phantomGlyph.t = treeGlyph.t - treeShiftY - shiftY;
+                phantomGlyph.l = treeGlyph.l - treeShiftX - shiftX;
+                this.props.moveGlyph (phantomGlyph);
             });
+        }});
 
-
-            // Move single glyph
-            $this.setState({
-                onMouseMove: function(e) {
-                    $this.props.moveGlyph(glyph);
-                }
-            });
-
-
-        } else {
-
-
-            let startCoords = {
-                left: glyph.l,
-                top:  glyph.t
-            };
-
-            let allMovingGlyphsLink = findChildrenLinks(glyph, this.props.connections);
-            let allMovingGlyphs = JSON.parse(JSON.stringify(getGlyphsArray(allMovingGlyphsLink, this.props.glyphs)));
-
-            this.setState({onMouseMove: (e) => {
-                let treeShiftX = startCoords.left - e.clientX;
-                let treeShiftY = startCoords.top - e.clientY;
-                allMovingGlyphs.forEach((treeGlyph) => {
-                    let phantomGlyph = Object.assign({}, treeGlyph);
-                    phantomGlyph.t = treeGlyph.t - treeShiftY - shiftY;
-                    phantomGlyph.l = treeGlyph.l - treeShiftX - shiftX;
-                    this.props.moveGlyph (phantomGlyph);
-                });
-            }});
-
-            this.setState({
-                onMouseUp: (e) => {
-                    this.setState({onMouseDown: null});
-                    this.setState({onMouseMove: null});
-                }
-            });
-        }
+        this.setState({
+            onMouseUp: (e) => {
+                this.setState({onMouseDown: null});
+                this.setState({onMouseMove: null});
+            }
+        });
     }
 
     /*moveTree*/tmp(targetGlyph) {
@@ -184,7 +123,6 @@ class Context extends Component {
     }
 
     setActiveGlyphInContext(glyph) {
-        // console.log('go up', glyph);
         this.props.setActiveGlyph(glyph);
     }
 
@@ -194,18 +132,12 @@ class Context extends Component {
                  onMouseMove={this.state.onMouseMove}
                  onClick={this.state.mouseClick}
                  onMouseDown={this.state.onMouseDown}
-                 onMouseUp={this.state.onMouseUp}>                 
-
-
-                {/* <GlyphMenu
-                    ref="glyphMenu"
-                    removeGlyph={this.removeGlyph} /> */}
-
+                 onMouseUp={this.state.onMouseUp}
+                 >
 
                 <ConnectionMenu
                     ref="connectionMenu"
                     removeConnection={this.removeConnection} />
-
 
                 {Object.keys(this.props.glyphs).map((glyphKey, index)=>
                     <Glyph
@@ -215,7 +147,6 @@ class Context extends Component {
                         setActiveGlyphInContext={this.setActiveGlyphInContext} />
                 )}
 
-
                 {this.props.connections.map((connection, index)=>
                     <Connection
                         key={index}
@@ -224,7 +155,6 @@ class Context extends Component {
                         onClick={this.onConnectionClick}
                         connection={connection} />
                 )}
-
             </div>
         )
     }

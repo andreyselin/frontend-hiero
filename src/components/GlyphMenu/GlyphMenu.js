@@ -4,7 +4,6 @@ import './GlyphMenu.css';
 class GlyphMenu extends Component {
     constructor(props) {
         super(props);
-        // this.activeGlyph = this.props.activeGlyph;
         this.editGlyph = this.editGlyph.bind(this);
         this.removeGlyph = this.removeGlyph.bind(this);
         this.toggleClasses = this.toggleClasses.bind(this);

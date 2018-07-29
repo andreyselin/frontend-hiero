@@ -10,7 +10,6 @@ import {removeConnection} from '../../store/actions/connectionActions';
 import GlyphMenu from '../GlyphMenu/GlyphMenu';
 import './Menu.css';
 
-
 function mapStateToProps(state) {
     return {
         glyphs:      {}, //state.navigators[0].context.glyphs,
@@ -18,7 +17,6 @@ function mapStateToProps(state) {
         activeGlyph: state.activeContext.activeGlyph
     }
 }
-
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators(
@@ -31,7 +29,6 @@ function matchDispatchToProps(dispatch) {
         dispatch
     );
 }
-
 
 class Menu extends Component {
     constructor(props) {
@@ -48,9 +45,7 @@ class Menu extends Component {
     }
 
     handleChange (target) {
-
         return event=>this.setState({[target]:event.target.value});
-
     }
 
     addGlyph() {
@@ -68,24 +63,6 @@ class Menu extends Component {
     showStore() {
         var a = Store.getState();
         console.log("a", a);
-    }
-
-    changeGlyphDirection(direction, e) {
-        e.preventDefault();
-        let targetGlyphClassList = this.params.targetGlyph.refs.root.classList;
-        
-        targetGlyphClassList.remove('GlyphHorizontal--column', 'GlyphHorizontal',
-                                     'GlyphHorizontal--reverse', 'GlyphHorizontal--column-reverse');
-        if (direction === 'top') {
-            targetGlyphClassList.add('GlyphHorizontal--column');
-        } else if (direction === 'left') {
-            targetGlyphClassList.add('GlyphHorizontal');
-        } else if (direction === 'right') {
-            targetGlyphClassList.add('GlyphHorizontal--reverse');
-        } else if (direction === 'bottom') {
-            targetGlyphClassList.add('GlyphHorizontal--column-reverse');
-        }
-        this.toggleClasses();
     }
 
     removeGlyph(glyph) {
@@ -166,5 +143,4 @@ class Menu extends Component {
     }
 }
 
-//export default Menu;
 export default connect(mapStateToProps, matchDispatchToProps)(Menu);

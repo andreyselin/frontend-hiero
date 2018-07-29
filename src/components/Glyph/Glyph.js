@@ -11,7 +11,6 @@ class Glyph extends Component {
         this.onMouseDown = this.onMouseDown.bind(this);
         this.chooseConnector = this.chooseConnector.bind(this);
         this.onDoubleClick = this.onDoubleClick.bind(this);
-        //this.checkMenuClickStart = 0;
     }
 
     componentDidMount(){
@@ -29,7 +28,6 @@ class Glyph extends Component {
     }
 
     onMouseDown (event) {
-        //this.checkMenuClickStart = Date.now();
         this.props.glyphOnMouseDown(this.props.glyph, event);
     }
 
@@ -70,7 +68,7 @@ class Glyph extends Component {
 
                 {this.props.glyph.img && (
                     <div className='GlyphImg'>
-                        <div style={{backgroundImage: `URL(${this.props.glyph.img.src})`}} alt="Glyph" className='Glyph__img' />
+                        <img alt="Glyph" className='Glyph__img' src={this.props.glyph.img.src} />
                     </div>
                 )}
                 <div className='GlyphContent'>
@@ -83,10 +81,6 @@ class Glyph extends Component {
         )
     }
 }
-
-
-// export default Glyph;
-
 
 const mapStateToProps = (state) => {
     return state;
