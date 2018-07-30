@@ -1,6 +1,13 @@
 const actionTypes = {
+    interface: {
+        showMenuBlock: "SHOW_MENU_BLOCK",
+        hideMenuBlock: "HIDE_MENU_BLOCK"
+    },
     navigator: {
         assignContext: "NAVIGATORS_ASSIGN_A_CONTEXT"
+    },
+    contextInfo: {
+        update: "CONTEXT_INFO_UPDATE"
     },
     glyph: {
         add:       "GLYPH_ADD",

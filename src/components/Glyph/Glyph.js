@@ -10,7 +10,7 @@ class Glyph extends Component {
         super(props);
         this.onMouseDown = this.onMouseDown.bind(this);
         this.chooseConnector = this.chooseConnector.bind(this);
-        this.onDoubleClick = this.onDoubleClick.bind(this);
+        this.checkMenuClickStart = 0;
     }
 
     componentDidMount(){
@@ -23,11 +23,8 @@ class Glyph extends Component {
         });
     }
 
-    onDoubleClick() {
-        this.props.setActiveGlyphInContext(this);
-    }
-
     onMouseDown (event) {
+        this.checkMenuClickStart = Date.now();
         this.props.glyphOnMouseDown(this.props.glyph, event);
     }
 
@@ -61,15 +58,12 @@ class Glyph extends Component {
                  }}
                  onMouseDown = {this.onMouseDown}
                  onMouseUp = {this.onMouseUp}
-                 onDoubleClick = {this.onDoubleClick}
                 >
                 <div onClick={this.chooseConnector('from')} className='GlyphConnector GlyphConnectorFrom'>Choose<br />connection<br />source</div>
                 <div onClick={this.chooseConnector('to')}   className='GlyphConnector GlyphConnectorTo'>Choose<br />connection<br />target</div>
 
                 {this.props.glyph.img && (
-                    <div className='GlyphImg'>
-                        <img alt="Glyph" className='Glyph__img' src={this.props.glyph.img.src} />
-                    </div>
+                    <img alt="Glyph" className='GlyphImg' src={this.props.glyph.img.src} />
                 )}
                 <div className='GlyphContent'>
                     <div className='GlyphHeader'>{this.props.glyph.header}</div>
@@ -81,6 +75,10 @@ class Glyph extends Component {
         )
     }
 }
+
+
+// export default Glyph;
+
 
 const mapStateToProps = (state) => {
     return state;
