@@ -29,6 +29,9 @@ const contextService = {
                     navigatorIndex: 0
                 }));
 
+                // Clearing connections to avoid redrawing old connections with new glyphs and linkng errors
+                store.dispatch (updateAllConnections ([]));
+
                 // Handling navigation stuff here - one navigator [0] to start
                 store.dispatch (updateContextInfo    ({ ...response.data.content.info }));
                 store.dispatch (updateAllGlyphs      ({ ...response.data.content.glyphs }));
