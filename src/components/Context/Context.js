@@ -72,10 +72,6 @@ class Context extends Component {
         });
     }
 
-    /*moveTree*/tmp(targetGlyph) {
-
-    }
-
     onConnectionClick(targetConnection, e) {
         let ConnectionMenu = this.refs.connectionMenu;
         let $this = this;

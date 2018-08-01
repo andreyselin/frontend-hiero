@@ -1,5 +1,5 @@
 // Modifier classes of Context div
-const addConnectionModes = {
+export const addConnectionModes = {
     connectionModeOff: "ConnectionModeOff",
     connectionModeOn: "ConnectionModeOn",
     fromGlyphChosen: "FromGlyphChosen"

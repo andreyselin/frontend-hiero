@@ -5,6 +5,7 @@ import glyphsReducer from './glyphsReducer';
 import connectionsReducer from './connectionsReducer';
 import addConnectionReducer    from './addConnectionReducer';
 import activeGlyph from './activeGlyphReducer';
+import menuBlocksReducer from './menuBlocksReducer';
 
 
 const allReducers = combineReducers({
@@ -20,6 +21,7 @@ const allReducers = combineReducers({
         // Zdes - tolko postoiannaia, nelzia peremeshivat
         activeGlyph: activeGlyph
     }),
+    menuBlocks: menuBlocksReducer,
     app: combineReducers({
         addConnection: addConnectionReducer
     })

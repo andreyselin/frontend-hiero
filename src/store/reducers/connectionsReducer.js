@@ -1,5 +1,5 @@
 // import contextService from '../../services/context';
-import actionTypes from '../../constants/actionTypes';
+import {actionTypes} from '../../constants/const';
 import Store from '../store.js';
 
 export default function connections(state = [], action) {

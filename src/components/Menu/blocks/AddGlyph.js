@@ -8,6 +8,7 @@ class MenuBlockAddGlyph extends Component {
         super(props);
         this.addGlyph      = this.addGlyph.bind(this);
         this.state = {
+            collapsed: true,
             newGlyphImgSrc: "",
             newGlyphHeader: "Заголовок",
             newGlyphLabel:  "Подзаголовок"
@@ -26,10 +27,14 @@ class MenuBlockAddGlyph extends Component {
         });
     }
 
+    // roll(){
+    //     this.state.collapsed = this.state.collapsed ? false : true;
+    // }
+
     render () {
 
         return (
-            <div className="Menu_block">
+            <div className={"Menu_block"+(this.state.collapsed ? ' collapsed' : '')}>
                 <div className="Menu_block_header">Add new glyph</div>
                 <div className="Menu_block_row">
                     Image source:<br />

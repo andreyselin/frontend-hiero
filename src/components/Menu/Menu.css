@@ -9,14 +9,38 @@
     z-index: var(--z-menu);
     background: #fff; /*#b7d8dd;*/
     box-sizing: border-box;
-    padding:20px;
     font-size: 14px;
     box-shadow: 0px 0 50px rgba(0,0,0,0.25);
 }
 
-.Menu_block {
-    margin-bottom: 20px;
+
+.Menu_header {
+    background-color: whitesmoke;
 }
+
+.Menu_icon {
+    cursor: pointer;
+    width: 35px;
+    height: auto;
+    padding:5px;
+}
+.Menu_icon:hover {
+    padding: 3px 5px 7px;
+}
+
+.Menu_block {
+    padding:15px 20px;
+}
+.Menu_block:hover {
+    padding-left:17px;
+    border-left: 3px solid #151515;
+}
+
+.Menu_block.__open-context {
+    /*border-left: 3px solid #151515;*/
+}
+
+
 .Menu_block_header {
     font-size: 18px;
     margin-bottom: 10px;

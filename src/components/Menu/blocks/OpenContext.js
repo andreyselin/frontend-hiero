@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {hideMenuBlock} from '../../../store/actions/interfaceActions';
+import {hideMenuBlock} from '../../../store/actions/menuBlocksActions';
+import {menuBlocks} from "../../../constants/const";
 import contextService from '../../../services/context';
 
 class MenuBlockOpenContext extends Component {
@@ -18,13 +19,14 @@ class MenuBlockOpenContext extends Component {
 
 
     openContext (contextId) {
-         contextService.open({contextId:contextId});
+        contextService.open({contextId:contextId});
+        this.props.hideMenuBlock(menuBlocks.openContext);
     }
 
 
     render () {
         return (
-            <div className="Menu_block">
+            <div className="Menu_block __open-context">
                 <div className="Menu_block_header">Open context</div>
                 {this.state.contexts.map((el, index) =>
                     <div key={index}><button

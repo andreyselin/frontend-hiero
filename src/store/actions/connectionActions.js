@@ -1,4 +1,4 @@
-import actionTypes from '../../constants/actionTypes';
+import {actionTypes} from '../../constants/const';
 
 
 export const addConnectionTurnOn = ()=> {
@@ -10,6 +10,12 @@ export const addConnectionTurnOn = ()=> {
 export const addConnectionTurnOff = ()=> {
     return {
         type: actionTypes.connection.add.turn.off
+    };
+};
+
+export const addConnectionToggle = ()=> {
+    return {
+        type: actionTypes.connection.add.toggle
     };
 };
 
