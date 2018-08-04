@@ -39,6 +39,7 @@ class Context extends Component {
         this.removeConnection = this.removeConnection.bind(this);
         this.setActiveGlyphInContext = this.setActiveGlyphInContext.bind(this);
         this.removeGlyph = this.removeGlyph.bind(this);
+        this.onMouseDown = this.onMouseDown.bind(this);
     }
 
     showMenu(event){}
@@ -122,35 +123,82 @@ class Context extends Component {
         this.props.setActiveGlyph(glyph);
     }
 
+    onMouseDown(e) {
+        let target = e.target;
+
+        if (target.classList.contains('context__wrapper')) {
+            let context = this.refs.context;
+            let contextWrapper = this.refs.contextWrapper;
+            let left = parseInt(context.style.left) || 0;
+            let top = parseInt(context.style.top) || 0;
+            let shiftX = e.clientX - left;
+            let shiftY = e.clientY - top;
+            
+            contextWrapper.classList.add('context__wrapper--grabbing');
+
+            this.setState({onMouseMove: (e) => {
+                context.style.left = e.clientX - shiftX + 'px';
+                context.style.top = e.clientY - shiftY + 'px';
+                this.setState({
+                    onMouseUp: (e) => {
+                        this.setState({onMouseMove: null});
+                    }
+                });
+                this.setState({
+                    onMouseOut: (e) => {
+                        contextWrapper.classList.remove('context__wrapper--grabbing');
+                        //console.log('focus out');
+                        this.setState({onMouseMove: null});
+                        this.setState({onMouseUp: null});
+                        this.setState({onMouseOut: null});
+                    }
+                });
+                this.setState({
+                    onMouseUp: (e) => {
+                        contextWrapper.classList.remove('context__wrapper--grabbing');
+                        //console.log('mouse up');
+                        this.setState({onMouseMove: null});
+                        this.setState({onMouseUp: null});
+                        this.setState({onMouseOut: null});
+                    }
+                });
+            }});
+        }        
+    }
+
     render () {
         return (
-            <div className={ classNames("Context", this.props.addConnection.mode) }
+            <div className={ classNames("context__wrapper") }
                  onMouseMove={this.state.onMouseMove}
                  onClick={this.state.mouseClick}
-                 onMouseDown={this.state.onMouseDown}
+                 onMouseDown={this.onMouseDown}
                  onMouseUp={this.state.onMouseUp}
-                 >
+                 onMouseOut={this.state.onMouseOut}
+                 ref='contextWrapper'
+                >
+                <div ref='context' className={ classNames("Context", this.props.addConnection.mode) }>
 
-                <ConnectionMenu
-                    ref="connectionMenu"
-                    removeConnection={this.removeConnection} />
+                    <ConnectionMenu
+                        ref="connectionMenu"
+                        removeConnection={this.removeConnection} />
 
-                {Object.keys(this.props.glyphs).map((glyphKey, index)=>
-                    <Glyph
-                        key={index}
-                        glyph={this.props.glyphs[glyphKey]}
-                        glyphOnMouseDown={this.glyphOnMouseDown}
-                        setActiveGlyphInContext={this.setActiveGlyphInContext} />
-                )}
+                    {Object.keys(this.props.glyphs).map((glyphKey, index)=>
+                        <Glyph
+                            key={index}
+                            glyph={this.props.glyphs[glyphKey]}
+                            glyphOnMouseDown={this.glyphOnMouseDown}
+                            setActiveGlyphInContext={this.setActiveGlyphInContext} />
+                    )}
 
-                {this.props.connections.map((connection, index)=>
-                    <Connection
-                        key={index}
-                        from={this.props.glyphs[connection.fromLink]}
-                        to={this.props.glyphs[connection.toLink]}
-                        onClick={this.onConnectionClick}
-                        connection={connection} />
-                )}
+                    {this.props.connections.map((connection, index)=>
+                        <Connection
+                            key={index}
+                            from={this.props.glyphs[connection.fromLink]}
+                            to={this.props.glyphs[connection.toLink]}
+                            onClick={this.onConnectionClick}
+                            connection={connection} />
+                    )}
+                </div>
             </div>
         )
     }
