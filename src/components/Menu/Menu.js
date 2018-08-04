@@ -29,6 +29,7 @@ function mapStateToProps(state) {
     return {
         activeGlyph:   state.activeContext.activeGlyph,
         addConnection: state.app.addConnection,
+        connections:   state.activeContext.connections,
         menuBlocks:    state.menuBlocks
     };
 }
