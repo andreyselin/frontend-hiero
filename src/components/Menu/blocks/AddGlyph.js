@@ -66,9 +66,6 @@ class MenuBlockAddGlyph extends Component {
                 <div className="Menu_block_row">
                     <button onClick={this.addGlyph}>Add glyph</button>
                 </div>
-                <div className="Menu_block_row">
-                    <button onClick={this.addConnection}>Add connection</button>
-                </div>
             </div>
         );
 

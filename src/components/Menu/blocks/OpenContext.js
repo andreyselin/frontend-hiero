@@ -12,7 +12,8 @@ class MenuBlockOpenContext extends Component {
         this.state = {
             contexts: [
                 {id: 1, title: "Default"},
-                {id: 2, title: "Second context"}
+                {id: 2, title: "Second context"},
+                {id: 3, title: "Russian tsars"}
             ]
         };
     }
