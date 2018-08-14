@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {addConnectionTurnOff} from '../../../store/actions/connectionActions';
 import {hideMenuBlock} from '../../../store/actions/menuBlocksActions';
-import {menuBlocks} from "../../../constants/const";
+// import {menuBlocks} from "../../../constants/const";
 
 class MenuBlockAddConnection extends Component {
     constructor(props) {

@@ -41,7 +41,7 @@ export const moveGlyph = glyph => {
 };
 
 
-export const updateAllGlyphs = (newGlyphs) => { //
+export const updateAllGlyphs = (newGlyphs) => {
     return {
         type: actionTypes.glyph.updateAll,
         payload: newGlyphs
@@ -54,6 +54,16 @@ export const removeGlyph = (glyph) => {
         payload: glyph
     }
 };
+
+export const editGlyphStyle = (glyph, style) => {
+    return {
+        type: actionTypes.glyph.editStyle,
+        payload: {
+            glyph,
+            style
+        }
+    }
+}
 
 export const setActiveGlyph = (glyph) => {
     return {
