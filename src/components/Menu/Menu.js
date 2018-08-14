@@ -4,9 +4,9 @@ import {connect} from 'react-redux';
 import Store from '../../store/store.js';
 
 import {addConnectionToggle,
-    removeConnection}     from '../../store/actions/connectionActions';
+        removeConnection}     from '../../store/actions/connectionActions';
 import {toggleMenuBlock}  from '../../store/actions/menuBlocksActions';
-import {removeGlyph}      from '../../store/actions/glyphActions';
+import {removeGlyph, editGlyphStyle}      from '../../store/actions/glyphActions';
 
 import {findGlyphsConections} from '../Context/contextFuncs';
 
@@ -27,7 +27,7 @@ import iconAddConnection from '../../img/iconAddConnection.png';
 
 function mapStateToProps(state) {
     return {
-        activeGlyph:   state.activeContext.activeGlyph,
+        activeGlyph:   state.app.activeGlyph,
         addConnection: state.app.addConnection,
         connections:   state.activeContext.connections,
         menuBlocks:    state.menuBlocks
@@ -39,7 +39,8 @@ function matchDispatchToProps(dispatch) {
             toggleMenuBlock:     toggleMenuBlock,
             addConnectionToggle: addConnectionToggle,
             removeGlyph:         removeGlyph,
-            removeConnection:    removeConnection
+            removeConnection:    removeConnection,
+            editGlyphStyle: editGlyphStyle
         },
         dispatch
     );
@@ -50,6 +51,7 @@ class Menu extends Component {
         super(props);
         this.addConnection = this.addConnection.bind(this);
         this.removeGlyph = this.removeGlyph.bind(this);
+        this.editGlyphImgPosition = this.editGlyphImgPosition.bind(this);
     }
 
     addConnection() {
@@ -65,11 +67,14 @@ class Menu extends Component {
         contextService.save(Store.getState().activeContext);
     }
 
-    removeGlyph(glyph) {
+    editGlyphImgPosition(activeGlyph, style) {
+        /* console.log(activeGlyph);
+        console.log(style); */
+        this.props.editGlyphStyle(activeGlyph.props.glyph.link, style);
+    }
 
-        // Po logike active glyph ne doljen hranitsya v contexte -
-        // seichas on uhodit pri sohranenii na backend.
-        let targetGlyph = this.props.activeGlyph.glyph.props.glyph.link;
+    removeGlyph(activeGlyph) {
+        let targetGlyph = activeGlyph.props.glyph.link;
         let removeConnections = findGlyphsConections(targetGlyph, this);
         
         removeConnections.forEach((connection) => {
@@ -86,11 +91,13 @@ class Menu extends Component {
                     <div className="Menu_block">
                         <img
                             className="Menu_icon"
+                            alt="OpenContext"
                             title="Open context"
                             src={iconOpen}
                             onClick={()=>this.props.toggleMenuBlock(menuBlocks.openContext)} />
                         <img
                             className="Menu_icon"
+                            alt="SaveCurrentContext"
                             title="Save current context"
                             src={iconSave}
                             onClick={this.saveContext} />
@@ -103,11 +110,13 @@ class Menu extends Component {
                     <div className="Menu_block">
                         <img
                             className="Menu_icon"
+                            alt="Add glyph"
                             title="Add glyph"
                             src={iconAddGlyph}
                             onClick={()=>this.props.toggleMenuBlock(menuBlocks.addGlyph)} />
                         <img
                             className="Menu_icon"
+                            alt="Add connection"
                             title="Add connection"
                             src={iconAddConnection}
                             onClick={this.addConnection} />
@@ -128,6 +137,7 @@ class Menu extends Component {
                     <div className="Menu_block">
                         <GlyphMenu activeGlyph={this.props.activeGlyph}
                                    removeGlyph={this.removeGlyph}
+                                   editGlyphImgPosition={this.editGlyphImgPosition}
                                    />
                     </div>
                 </div>

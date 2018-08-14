@@ -56,6 +56,15 @@ export default function glyphs(state = {}, action) {
     }
 
 
+    if  (action.type === actionTypes.glyph.editStyle) {
+        return {
+            ...state,
+            [action.payload.glyph]:{
+                ...state[action.payload.glyph],
+                style: action.payload.style
+            }
+        }
+    }
 
 
     return state;

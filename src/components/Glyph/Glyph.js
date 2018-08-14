@@ -50,7 +50,7 @@ class Glyph extends Component {
                 className={classNames(
                     "Glyph",
                     "noselect",
-                    this.props.glyph.classList
+                    this.props.glyph.style
                 )}
 
                  style={{
@@ -68,7 +68,7 @@ class Glyph extends Component {
 
                 {this.props.glyph.img && (
                     <div className='GlyphImg'>
-                        <img alt="Glyph" className='Glyph__img' src={this.props.glyph.img.src} />
+                        <img alt={this.props.glyph.header} className='Glyph__img' src={this.props.glyph.img.src} />
                     </div>
                 )}
                 <div className='GlyphContent'>

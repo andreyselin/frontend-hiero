@@ -127,10 +127,11 @@ class Context extends Component {
         let target = e.target;
 
         if (target.classList.contains('context__wrapper')) {
+            let radix = 10;
             let context = this.refs.context;
             let contextWrapper = this.refs.contextWrapper;
-            let left = parseInt(context.style.left) || 0;
-            let top = parseInt(context.style.top) || 0;
+            let left = parseInt(context.style.left, radix) || 0;
+            let top = parseInt(context.style.top, radix) || 0;
             let shiftX = e.clientX - left;
             let shiftY = e.clientY - top;
             
@@ -147,7 +148,6 @@ class Context extends Component {
                 this.setState({
                     onMouseOut: (e) => {
                         contextWrapper.classList.remove('context__wrapper--grabbing');
-                        //console.log('focus out');
                         this.setState({onMouseMove: null});
                         this.setState({onMouseUp: null});
                         this.setState({onMouseOut: null});
@@ -156,7 +156,6 @@ class Context extends Component {
                 this.setState({
                     onMouseUp: (e) => {
                         contextWrapper.classList.remove('context__wrapper--grabbing');
-                        //console.log('mouse up');
                         this.setState({onMouseMove: null});
                         this.setState({onMouseUp: null});
                         this.setState({onMouseOut: null});
