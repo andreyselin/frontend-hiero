@@ -17,8 +17,8 @@ const contextService = {
         });
     }),
     open: openParams => new Promise (resolve => {
-        axios.get('http://localhost:5000/contexts/open', {params: {id:openParams.contextId}})
-        // axios.get('http://5.101.127.18:5000/contexts/open', {params: {id:openParams.contextId}})
+        //axios.get('http://localhost:5000/contexts/open', {params: {id:openParams.contextId}})
+         axios.get('http://5.101.127.18:5000/contexts/open', {params: {id:openParams.contextId}})
             .then (response => {
 
                 response.data.content.info = {
@@ -41,8 +41,8 @@ const contextService = {
     }),
 
     save: context => new Promise (resolve => {
-        axios.post('http://localhost:5000/contexts/save', {
-        //axios.post('http://5.101.127.18:5000/contexts/save', {
+        //axios.post('http://localhost:5000/contexts/save', {
+        axios.post('http://5.101.127.18:5000/contexts/save', {
             id: context.info.id,
             title: context.info.title,
             content: JSON.stringify({
