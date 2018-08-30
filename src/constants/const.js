@@ -19,7 +19,9 @@ export const actionTypes = {
     menuBlocks: {
         show:   "MENU_BLOCK_SHOW",
         hide:   "MENU_BLOCK_HIDE",
-        toggle: "MENU_BLOCK_TOGGLE"
+        toggle: "MENU_BLOCK_TOGGLE",
+
+        showContextsToOpen: "MENU_BLOCK_SHOW_CONTEXTS_TO_OPEN"
     },
     navigator: {
         assignContext: "NAVIGATORS_ASSIGN_A_CONTEXT"

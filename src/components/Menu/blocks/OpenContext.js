@@ -19,6 +19,11 @@ class MenuBlockOpenContext extends Component {
     }
 
 
+    componentDidMount() {
+        contextService.listRecent();
+    }
+
+
     openContext (contextId) {
         contextService.open({contextId:contextId});
         this.props.hideMenuBlock(menuBlocks.openContext);
@@ -29,7 +34,9 @@ class MenuBlockOpenContext extends Component {
         return (
             <div className="Menu_block __open-context">
                 <div className="Menu_block_header">Open context</div>
-                {this.state.contexts.map((el, index) =>
+                {
+                this.props.menuBlock.list === null ? (()=><div>Загрузка</div>)() :
+                this.props.menuBlock.list.map((el, index) =>
                     <div key={index}><button
                         className="Menu_block_row"
                         onClick={()=>this.openContext(el.id)}
@@ -42,7 +49,9 @@ class MenuBlockOpenContext extends Component {
 }
 
 function mapStateToProps(state) {
-    return {}
+    return {
+        menuBlock: state.menuBlocks.openContext
+    }
 }
 
 function matchDispatchToProps(dispatch) {

@@ -20,3 +20,10 @@ export const toggleMenuBlock = name => {
         payload: {name: name}
     };
 };
+
+export const showContextsToOpen = list => {
+    return {
+        type: actionTypes.menuBlocks.showContextsToOpen,
+        payload: list
+    };
+};

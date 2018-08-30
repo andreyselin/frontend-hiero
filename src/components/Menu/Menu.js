@@ -126,14 +126,12 @@ class Menu extends Component {
                             className="Menu_icon"
                             alt="Add glyph"
                             title="Add glyph"
-                            alt="Add glyph"
                             src={iconAddGlyph}
                             onClick={()=>this.props.toggleMenuBlock(menuBlocks.addGlyph)} />
                         <img
                             className="Menu_icon"
                             alt="Add connection"
                             title="Add connection"
-                            alt="Add connection"
                             src={iconAddConnection}
                             onClick={this.addConnection} />
                     </div>

@@ -3,19 +3,19 @@ import store from '../store/store';
 import {assignNavigatorAContext} from '../store/actions/navigatorActions';
 import {openContextActionWrapper} from "../store/actions/contextActionWrappers";
 import {setSavedContextId} from "../store/actions/contextInfoActions";
+import {showContextsToOpen} from "../store/actions/menuBlocksActions";
 
 var contexts = [];
 
 const contextService = {
-    /*
     listRecent: () => new Promise (resolve => {
-        axios.get('http://localhost:5000/contexts/list-recent')
-        //axios.get('http://5.101.127.18:5000/contexts/list-recent')
+        //axios.get('http://localhost:5000/contexts/list')
+        axios.get('http://5.101.127.18:5000/contexts/list-recent')
         .then (response => {
-            console.log("listRecent response", response);
+            store.dispatch (showContextsToOpen (response.data.list));
+            resolve ();
         });
     }),
-    */
     open: openParams => new Promise (resolve => {
         axios.get('http://localhost:5000/contexts/open', {params: {id:openParams.contextId}})
         // axios.get('http://5.101.127.18:5000/contexts/open', {params: {id:openParams.contextId}})
@@ -41,7 +41,8 @@ const contextService = {
     }),
 
     save: context => new Promise (resolve => {
-        axios.post('http://5.101.127.18:5000/contexts/save', {
+        axios.post('http://localhost:5000/contexts/save', {
+        //axios.post('http://5.101.127.18:5000/contexts/save', {
             id: context.info.id,
             title: context.info.title,
             content: JSON.stringify({
