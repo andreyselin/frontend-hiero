@@ -10,7 +10,7 @@ var contexts = [];
 const contextService = {
     listRecent: () => new Promise (resolve => {
         //axios.get('http://localhost:5000/contexts/list')
-        axios.get('http://5.101.127.18:5000/contexts/list-recent')
+        axios.get('http://5.101.127.18:5000/contexts/list')
         .then (response => {
             store.dispatch (showContextsToOpen (response.data.list));
             resolve ();
