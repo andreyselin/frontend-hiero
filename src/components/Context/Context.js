@@ -147,7 +147,6 @@ class Context extends Component {
                 this.setState({
                     onMouseOut: (e) => {
                         contextWrapper.classList.remove('context__wrapper--grabbing');
-                        //console.log('focus out');
                         this.setState({onMouseMove: null});
                         this.setState({onMouseUp: null});
                         this.setState({onMouseOut: null});
@@ -156,7 +155,6 @@ class Context extends Component {
                 this.setState({
                     onMouseUp: (e) => {
                         contextWrapper.classList.remove('context__wrapper--grabbing');
-                        //console.log('mouse up');
                         this.setState({onMouseMove: null});
                         this.setState({onMouseUp: null});
                         this.setState({onMouseOut: null});

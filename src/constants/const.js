@@ -37,7 +37,8 @@ export const actionTypes = {
         move:      "GLYPH_MOVE",
         moveTree:  "GLYPH_MOVE_TREE",
         updateAll: "GLYPH_UPDATE_ALL",
-        setActive: "GLYPH_SET_ACTIVE"
+        setActive: "GLYPH_SET_ACTIVE",
+        editStyle: "GLYPH_EDIT_STYLE"
     },
     connection: {
         add:{

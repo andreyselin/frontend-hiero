@@ -21,19 +21,18 @@ class GlyphMenu extends Component {
 
     changeGlyphDirection(direction, e) {
         e.preventDefault();
-        let targetGlyphClassList = this.props.activeGlyph.glyph.refs.root.classList;
+        let newStyle = null;
         
-        targetGlyphClassList.remove('GlyphHorizontal--column', 'GlyphHorizontal',
-                                     'GlyphHorizontal--reverse', 'GlyphHorizontal--column-reverse');
         if (direction === 'top') {
-            targetGlyphClassList.add('GlyphHorizontal--column');
+            newStyle = 'GlyphHorizontal--column';
         } else if (direction === 'left') {
-            targetGlyphClassList.add('GlyphHorizontal');
+            newStyle = 'GlyphHorizontal';
         } else if (direction === 'right') {
-            targetGlyphClassList.add('GlyphHorizontal--reverse');
+            newStyle = 'GlyphHorizontal--reverse';
         } else if (direction === 'bottom') {
-            targetGlyphClassList.add('GlyphHorizontal--column-reverse');
+            newStyle = 'GlyphHorizontal--column-reverse';
         }
+        this.props.editGlyphImgPosition(this.props.activeGlyph.glyph, newStyle);
         this.toggleClasses();
     }
 
@@ -46,7 +45,6 @@ class GlyphMenu extends Component {
     }
 
     render () {
-        // console.log('GlyphMenu ', this.props.activeGlyph.glyph);
         if (this.props.activeGlyph.glyph) {
             return (
                 <div className = "glyph-menu">

@@ -12,18 +12,14 @@ const allReducers = combineReducers({
 
     navigators: navigatorsReducer,
     activeContext: combineReducers({
-
         info:        contextInfoReducer,
         glyphs:      glyphsReducer,
-        connections: connectionsReducer,
-
-        // Po logike ne doljem byt zdes, tak kak eto nepostoyannaia informacia, a operativnaia
-        // Zdes - tolko postoiannaia, nelzia peremeshivat
-        activeGlyph: activeGlyph
+        connections: connectionsReducer       
     }),
     menuBlocks: menuBlocksReducer,
     app: combineReducers({
-        addConnection: addConnectionReducer
+        addConnection: addConnectionReducer,
+        activeGlyph: activeGlyph,
     })
 });
 
