@@ -46,3 +46,9 @@ export const updateAllConnections = (newConnections) => {
         payload: newConnections
     };
 };
+
+export const clearAllConnections = () => {
+    return {
+        type: actionTypes.connection.clearAll
+    };
+};

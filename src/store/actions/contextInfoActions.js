@@ -6,3 +6,16 @@ export const updateContextInfo = (payload)=> {
         payload:payload
     };
 };
+
+export const setSavedContextId = id => {
+    return {
+        type: actionTypes.contextInfo.setSavedContextId,
+        id: id
+    };
+};
+
+export const clearContextInfo = ()=> {
+    return {
+        type: actionTypes.contextInfo.clear
+    };
+};

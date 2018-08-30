@@ -129,8 +129,8 @@ class Context extends Component {
         if (target.classList.contains('context__wrapper')) {
             let context = this.refs.context;
             let contextWrapper = this.refs.contextWrapper;
-            let left = parseInt(context.style.left) || 0;
-            let top = parseInt(context.style.top) || 0;
+            let left = parseInt(context.style.left, 10) || 0;
+            let top = parseInt(context.style.top, 10) || 0;
             let shiftX = e.clientX - left;
             let shiftY = e.clientY - top;
             

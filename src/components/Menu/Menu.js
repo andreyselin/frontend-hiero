@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Store from '../../store/store.js';
 
+import {createContextActionWrapper} from "../../store/actions/contextActionWrappers";
 import {addConnectionToggle,
     removeConnection}     from '../../store/actions/connectionActions';
 import {toggleMenuBlock}  from '../../store/actions/menuBlocksActions';
@@ -39,7 +40,7 @@ function matchDispatchToProps(dispatch) {
             toggleMenuBlock:     toggleMenuBlock,
             addConnectionToggle: addConnectionToggle,
             removeGlyph:         removeGlyph,
-            removeConnection:    removeConnection
+            removeConnection:    removeConnection,
         },
         dispatch
     );
@@ -50,6 +51,7 @@ class Menu extends Component {
         super(props);
         this.addConnection = this.addConnection.bind(this);
         this.removeGlyph = this.removeGlyph.bind(this);
+        this.createContext = this.createContext.bind(this);
     }
 
     addConnection() {
@@ -77,6 +79,10 @@ class Menu extends Component {
         });
         this.props.removeGlyph(targetGlyph);
     }
+
+    createContext () {
+        createContextActionWrapper();
+    }
     
     render() {
         return (
@@ -86,12 +92,20 @@ class Menu extends Component {
                     <div className="Menu_block">
                         <img
                             className="Menu_icon"
+                            title="Create context"
+                            alt="Create context"
+                            src={iconOpen}
+                            onClick={this.createContext} />
+                        <img
+                            className="Menu_icon"
                             title="Open context"
+                            alt="Open context"
                             src={iconOpen}
                             onClick={()=>this.props.toggleMenuBlock(menuBlocks.openContext)} />
                         <img
                             className="Menu_icon"
                             title="Save current context"
+                            alt="Save current context"
                             src={iconSave}
                             onClick={this.saveContext} />
                     </div>
@@ -104,11 +118,13 @@ class Menu extends Component {
                         <img
                             className="Menu_icon"
                             title="Add glyph"
+                            alt="Add glyph"
                             src={iconAddGlyph}
                             onClick={()=>this.props.toggleMenuBlock(menuBlocks.addGlyph)} />
                         <img
                             className="Menu_icon"
                             title="Add connection"
+                            alt="Add connection"
                             src={iconAddConnection}
                             onClick={this.addConnection} />
                     </div>

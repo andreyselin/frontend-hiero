@@ -34,6 +34,10 @@ export default function connections(state = [], action) {
         return action.payload;
     }
 
+    if (action.type === actionTypes.connection.clearAll) {
+        return [];
+    }
+
     return state;
 }
 

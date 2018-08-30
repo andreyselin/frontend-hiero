@@ -6,6 +6,20 @@ export default function contextInfoReducer(state = {}, action) {
         return {...action.payload}
     }
 
+    else if (action.type === actionTypes.contextInfo.setSavedContextId) {
+        return {
+            ...state,
+            id: action.id
+        }
+    }
+
+    else if (action.type === actionTypes.contextInfo.clear) {
+        return {
+            id: null,
+            title: "Untitled"
+        }
+    }
+
     return state;
 }
 

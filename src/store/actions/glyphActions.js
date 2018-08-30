@@ -55,6 +55,12 @@ export const removeGlyph = (glyph) => {
     }
 };
 
+export const clearAllGlyphs = () => {
+    return {
+        type: actionTypes.glyph.clearAll
+    }
+};
+
 export const setActiveGlyph = (glyph) => {
     return {
         type: actionTypes.glyph.setActive,

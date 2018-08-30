@@ -15,7 +15,7 @@ export default function glyphs(state = {}, action) {
 
 
 
-    if  (action.type === actionTypes.glyph.setBounds) {
+    else if  (action.type === actionTypes.glyph.setBounds) {
         return {
             ...state,
             [action.payload.link]:{...state[action.payload.link], ...action.payload}
@@ -25,7 +25,7 @@ export default function glyphs(state = {}, action) {
 
 
 
-    if (action.type === actionTypes.glyph.move) {
+    else if (action.type === actionTypes.glyph.move) {
 
         return {
             ...state,
@@ -40,14 +40,21 @@ export default function glyphs(state = {}, action) {
 
 
 
-    if (action.type === actionTypes.glyph.updateAll) {
+    else if (action.type === actionTypes.glyph.updateAll) {
         return action.payload;
     }
 
 
 
 
-    if (action.type === actionTypes.glyph.remove) {
+    else if (action.type === actionTypes.glyph.clearAll) {
+        return {};
+    }
+
+
+
+
+    else if (action.type === actionTypes.glyph.remove) {
         let newState = {...state};
         delete newState[action.payload];
         return {

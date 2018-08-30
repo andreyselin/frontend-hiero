@@ -25,11 +25,14 @@ export const actionTypes = {
         assignContext: "NAVIGATORS_ASSIGN_A_CONTEXT"
     },
     contextInfo: {
-        update: "CONTEXT_INFO_UPDATE"
+        update: "CONTEXT_INFO_UPDATE",
+        setSavedContextId: "CONTEXT_INFO_SET_SAVED_CONTEXT_ID",
+        clear:  "CONTEXT_INFO_CLEAR" // Used in starting new context
     },
     glyph: {
         add:       "GLYPH_ADD",
         remove:    "GLYPH_REMOVE",
+        clearAll:  "GLYPH_CLEAR_ALL",
         setBounds: "GLYPH_SET_BOUNDS",
         move:      "GLYPH_MOVE",
         moveTree:  "GLYPH_MOVE_TREE",
@@ -49,6 +52,7 @@ export const actionTypes = {
             }
         },
         updateAll: "CONNECTION_UPDATE_ALL",
-        remove: "REMOVE_CONNECTION"
+        clearAll:  "CONNECTION_CLEAR_ALL",
+        remove:    "REMOVE_CONNECTION"
     }
 };

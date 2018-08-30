@@ -1,51 +1,57 @@
 import axios from 'axios';
 import store from '../store/store';
 import {assignNavigatorAContext} from '../store/actions/navigatorActions';
-import {updateContextInfo} from '../store/actions/contextInfoActions';
-import {updateAllGlyphs} from '../store/actions/glyphActions';
-import {updateAllConnections} from '../store/actions/connectionActions';
+import {openContextActionWrapper} from "../store/actions/contextActionWrappers";
+import {setSavedContextId} from "../store/actions/contextInfoActions";
 
 var contexts = [];
 
 const contextService = {
+    /*
+    listRecent: () => new Promise (resolve => {
+        axios.get('http://localhost:5000/contexts/list-recent')
+        //axios.get('http://5.101.127.18:5000/contexts/list-recent')
+        .then (response => {
+            console.log("listRecent response", response);
+        });
+    }),
+    */
     open: openParams => new Promise (resolve => {
-        axios.get('http://5.101.127.18:5000/contexts/open', {params: {id:openParams.contextId}})
+        axios.get('http://localhost:5000/contexts/open', {params: {id:openParams.contextId}})
+        // axios.get('http://5.101.127.18:5000/contexts/open', {params: {id:openParams.contextId}})
             .then (response => {
 
-                // Must include id to resave existing or new
-                // Tmp: following should be saved on backed in content as well as it is saved in separated db columns
                 response.data.content.info = {
-                    id: openParams.contextId,
+                    id: response.data.id,
                     title: response.data.title
                 };
-                // End of tmp
-
 
                 contexts.push(response.data.content);
 
-                // Handling navigation stuff here - one navigator [0] to start
+                // Handling navigation stuff here - first use only one navigator [0] to simplify
                 store.dispatch (assignNavigatorAContext ({
                     contextIndex: contexts.length - 1,
                     navigatorIndex: 0
                 }));
 
-                // Clearing connections to avoid redrawing old connections with new glyphs and linkng errors
-                store.dispatch (updateAllConnections ([]));
-
-                // Handling navigation stuff here - one navigator [0] to start
-                store.dispatch (updateContextInfo    ({ ...response.data.content.info }));
-                store.dispatch (updateAllGlyphs      ({ ...response.data.content.glyphs }));
-                store.dispatch (updateAllConnections ([ ...response.data.content.connections ]));
+                openContextActionWrapper(response.data.content);
 
                 resolve ();
             });
     }),
+
     save: context => new Promise (resolve => {
         axios.post('http://5.101.127.18:5000/contexts/save', {
             id: context.info.id,
             title: context.info.title,
-            content: JSON.stringify(context)
-        }).then (response => resolve ());
+            content: JSON.stringify({
+                glyphs: context.glyphs,
+                connections: context.connections
+            })
+        }).then (response => {
+            store.dispatch (setSavedContextId (response.data.id));
+            resolve();
+        });
     })
 };
 
