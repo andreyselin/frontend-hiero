@@ -11,6 +11,7 @@ import {removeGlyph, editGlyphStyle}      from '../../store/actions/glyphActions
 
 import {findGlyphsConections} from '../Context/contextFuncs';
 
+import MenuBlockContextInfo   from './blocks/ContextInfo';
 import MenuBlockAddGlyph      from './blocks/AddGlyph';
 import MenuBlockOpenContext   from './blocks/OpenContext';
 import MenuBlockAddConnection from './blocks/AddConnection';
@@ -21,9 +22,10 @@ import {menuBlocks, addConnectionModes}
 import GlyphMenu      from '../GlyphMenu/GlyphMenu';
 import './Menu.css';
 
-import iconOpen from '../../img/iconOpen.png';
-import iconSave from '../../img/iconSave.png';
-import iconAddGlyph from '../../img/iconAddGlyph.png';
+import iconCreate        from '../../img/iconCreate.png';
+import iconOpen          from '../../img/iconOpen.png';
+import iconSave          from '../../img/iconSave.png';
+import iconAddGlyph      from '../../img/iconAddGlyph.png';
 import iconAddConnection from '../../img/iconAddConnection.png';
 
 function mapStateToProps(state) {
@@ -100,7 +102,7 @@ class Menu extends Component {
 
                             title="Create context"
                             alt="Create context"
-                            src={iconOpen}
+                            src={iconCreate}
                             onClick={this.createContext} />
                         <img
                             className="Menu_icon"
@@ -120,6 +122,8 @@ class Menu extends Component {
                 </div>
 
                 <div className="Menu_content">
+
+                    <MenuBlockContextInfo />
 
                     <div className="Menu_block">
                         <img

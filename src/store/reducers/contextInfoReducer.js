@@ -20,6 +20,13 @@ export default function contextInfoReducer(state = {}, action) {
         }
     }
 
+    else if (action.type === actionTypes.contextInfo.setContextName) {
+        return {
+            ...state,
+            title: action.payload
+        }
+    }
+
     return state;
 }
 

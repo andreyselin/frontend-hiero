@@ -19,3 +19,10 @@ export const clearContextInfo = ()=> {
         type: actionTypes.contextInfo.clear
     };
 };
+
+export const setContextName = (newTitle)=> {
+    return {
+        type: actionTypes.contextInfo.setContextName,
+        payload: newTitle
+    };
+};

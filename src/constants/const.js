@@ -27,9 +27,10 @@ export const actionTypes = {
         assignContext: "NAVIGATORS_ASSIGN_A_CONTEXT"
     },
     contextInfo: {
-        update: "CONTEXT_INFO_UPDATE",
+        update:            "CONTEXT_INFO_UPDATE",
         setSavedContextId: "CONTEXT_INFO_SET_SAVED_CONTEXT_ID",
-        clear:  "CONTEXT_INFO_CLEAR" // Used in starting new context
+        clear:             "CONTEXT_INFO_CLEAR", // Used in starting new context
+        setContextName:    "CONTEXT_INFO_SET_CONTEXT_NAME"
     },
     glyph: {
         add:       "GLYPH_ADD",
