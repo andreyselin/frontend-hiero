@@ -1,4 +1,4 @@
-import {actionTypes, addConnectionModes}      from '../../constants/const';
+import {actionTypes, addConnectionModes}      from '../../const';
 
 var initialState = {mode: addConnectionModes.connectionModeOff};
 

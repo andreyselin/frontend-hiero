@@ -18,7 +18,7 @@ import MenuBlockAddConnection from './blocks/AddConnection';
 
 import contextService from '../../services/context';
 import {menuBlocks, addConnectionModes}
-                      from "../../constants/const";
+                      from "../../const";
 import GlyphMenu      from '../GlyphMenu/GlyphMenu';
 import './Menu.css';
 

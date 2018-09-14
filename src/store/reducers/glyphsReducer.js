@@ -1,4 +1,4 @@
-import {actionTypes} from '../../constants/const';
+import {actionTypes} from '../../const';
 
 
 /*-glyphReducer-*/

@@ -1,5 +1,5 @@
 // import contextService from '../../services/context';
-import {actionTypes} from '../../constants/const';
+import {actionTypes} from '../../const';
 // import Store from '../store.js';
 
 

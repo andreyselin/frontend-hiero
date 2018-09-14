@@ -1,4 +1,4 @@
-import {actionTypes, menuBlocks} from '../../constants/const';
+import {actionTypes, menuBlocks} from '../../const';
 
 var initialState={
     [menuBlocks.addGlyph]:     {show:false},

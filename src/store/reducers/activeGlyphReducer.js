@@ -1,4 +1,4 @@
-import {actionTypes} from '../../constants/const';
+import {actionTypes} from '../../const';
 
 export default function activeGlyph(state = {}, action) {
     

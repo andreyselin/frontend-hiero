@@ -1,4 +1,4 @@
-import {actionTypes} from '../../constants/const';
+import {actionTypes} from '../../const';
 import Glyph from '../../classes/glyph';
 
 export const addGlyph = (newGlyph)=> {

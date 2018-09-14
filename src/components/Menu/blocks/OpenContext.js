@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {hideMenuBlock} from '../../../store/actions/menuBlocksActions';
-import {menuBlocks} from "../../../constants/const";
+import {menuBlocks} from "../../../const";
 import contextService from '../../../services/context';
 
 class MenuBlockOpenContext extends Component {
