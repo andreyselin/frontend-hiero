@@ -32,7 +32,9 @@ function matchDispatchToProps(dispatch) {
 class Context extends Component {
     constructor (props) {
         super(props);
-        this.state = {};
+        this.state = {
+            justClickedCount: 0
+        };
         this.glyphOnMouseDown = this.glyphOnMouseDown.bind(this);
         this.onConnectionClick = this.onConnectionClick.bind(this);
         this.onConnectionClick = this.onConnectionClick.bind(this);
@@ -136,32 +138,28 @@ class Context extends Component {
             
             contextWrapper.classList.add('context__wrapper--grabbing');
 
-            this.setState({onMouseMove: (e) => {
-                context.style.left = e.clientX - shiftX + 'px';
-                context.style.top = e.clientY - shiftY + 'px';
-                this.setState({
-                    onMouseUp: (e) => {
-                        this.setState({onMouseMove: null});
+            this.setState({
+                onMouseMove: (e) => {
+                    context.style.left = e.clientX - shiftX + 'px';
+                    context.style.top = e.clientY - shiftY + 'px';
+                },
+                onMouseOut: () => {
+                    contextWrapper.classList.remove('context__wrapper--grabbing');
+                    this.setState({onMouseMove: null, onMouseUp: null, onMouseOut: null});
+                },
+                onMouseUp: () => {
+
+                    // Handling double click
+                    setTimeout(()=>this.state.justClickedCount=0, 300);
+                    if (++this.state.justClickedCount === 2) {
+                        console.log ("Hey, that`s double click!");
                     }
-                });
-                this.setState({
-                    onMouseOut: (e) => {
-                        contextWrapper.classList.remove('context__wrapper--grabbing');
-                        this.setState({onMouseMove: null});
-                        this.setState({onMouseUp: null});
-                        this.setState({onMouseOut: null});
-                    }
-                });
-                this.setState({
-                    onMouseUp: (e) => {
-                        contextWrapper.classList.remove('context__wrapper--grabbing');
-                        this.setState({onMouseMove: null});
-                        this.setState({onMouseUp: null});
-                        this.setState({onMouseOut: null});
-                    }
-                });
-            }});
-        }        
+
+                    contextWrapper.classList.remove('context__wrapper--grabbing');
+                    this.setState({onMouseMove: null, onMouseUp: null, onMouseOut: null});
+                }
+            });
+        }
     }
 
     render () {
