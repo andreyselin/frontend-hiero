@@ -30,7 +30,10 @@ export const actionTypes = {
         update:            "CONTEXT_INFO_UPDATE",
         setSavedContextId: "CONTEXT_INFO_SET_SAVED_CONTEXT_ID",
         clear:             "CONTEXT_INFO_CLEAR", // Used in starting new context
-        setContextName:    "CONTEXT_INFO_SET_CONTEXT_NAME"
+        setContextName:    "CONTEXT_INFO_SET_CONTEXT_NAME",
+
+        startPanning:      "CONTEXT_START_PANNING",
+        panContext:        "CONTEXT_PAN"
     },
     glyph: {
         add:       "GLYPH_ADD",

@@ -21,10 +21,10 @@ const contextService = {
          axios.get('http://5.101.127.18:5000/contexts/open', {params: {id:openParams.contextId}})
             .then (response => {
 
-                response.data.content.info = {
-                    id: response.data.id,
-                    title: response.data.title
-                };
+                // response.data.content.info = {
+                //     id: response.data.id,
+                //     title: response.data.title
+                // };
 
                 contexts.push(response.data.content);
 
@@ -45,10 +45,7 @@ const contextService = {
         axios.post('http://5.101.127.18:5000/contexts/save', {
             id: context.info.id,
             title: context.info.title,
-            content: JSON.stringify({
-                glyphs: context.glyphs,
-                connections: context.connections
-            })
+            content: JSON.stringify(context)
         }).then (response => {
             store.dispatch (setSavedContextId (response.data.id));
             resolve();

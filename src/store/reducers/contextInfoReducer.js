@@ -1,6 +1,15 @@
 import {actionTypes} from '../../const';
 
-export default function contextInfoReducer(state = {}, action) {
+
+// Used to remember panning start offset
+let contextPanner = {};
+let defaultState = {
+    t: 0,
+    l: 0
+};
+
+
+export default function contextInfoReducer(state = defaultState, action) {
 
     if (action.type === actionTypes.contextInfo.update) {
         return {...action.payload}
@@ -15,6 +24,7 @@ export default function contextInfoReducer(state = {}, action) {
 
     else if (action.type === actionTypes.contextInfo.clear) {
         return {
+            ...state,
             id: null,
             title: "Untitled"
         }
@@ -24,6 +34,22 @@ export default function contextInfoReducer(state = {}, action) {
         return {
             ...state,
             title: action.payload
+        }
+    }
+
+    // Payload is event
+    // Not changes state
+    else if (action.type === actionTypes.contextInfo.startPanning) {
+        contextPanner.shiftX = action.payload.clientX - state.l;
+        contextPanner.shiftY = action.payload.clientY - state.t;
+    }
+
+    // Payload is event
+    else if (action.type === actionTypes.contextInfo.panContext) {
+        return {
+            ...state,
+            t: action.payload.clientY - contextPanner.shiftY,
+            l: action.payload.clientX - contextPanner.shiftX
         }
     }
 

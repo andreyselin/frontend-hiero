@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import Store from '../../store/store.js';
+import store from '../../store/store.js';
 
 import {createContextActionWrapper} from "../../store/actions/contextActionWrappers";
 import {addConnectionToggle,
@@ -63,17 +63,14 @@ class Menu extends Component {
     }
 
     showStore() {
-        var a = Store.getState();
-        console.log("a", a);
+        console.log("Store:", store.getState());
     }
 
     saveContext() {
-        contextService.save(Store.getState().activeContext);
+        contextService.save(store.getState().activeContext);
     }
 
     editGlyphImgPosition(activeGlyph, style) {
-        /* console.log(activeGlyph);
-        console.log(style); */
         this.props.editGlyphStyle(activeGlyph.props.glyph.link, style);
     }
 

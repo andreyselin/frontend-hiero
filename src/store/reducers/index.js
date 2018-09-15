@@ -12,14 +12,14 @@ const allReducers = combineReducers({
 
     navigators: navigatorsReducer,
     activeContext: combineReducers({
-        info:        contextInfoReducer,
-        glyphs:      glyphsReducer,
-        connections: connectionsReducer       
+        info:         contextInfoReducer,
+        glyphs:       glyphsReducer,
+        connections:  connectionsReducer
     }),
     menuBlocks: menuBlocksReducer,
     app: combineReducers({
         addConnection: addConnectionReducer,
-        activeGlyph: activeGlyph,
+        activeGlyph: activeGlyph
     })
 });
 

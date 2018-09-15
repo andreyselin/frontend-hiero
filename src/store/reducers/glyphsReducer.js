@@ -1,4 +1,6 @@
 import {actionTypes} from '../../const';
+import store from '../../store/store';
+import Glyph from '../../classes/glyph';
 
 
 /*-glyphReducer-*/
@@ -6,9 +8,20 @@ export default function glyphs(state = {}, action) {
 
 
     if (action.type === actionTypes.glyph.add) {
+
+        let newGlyph = new Glyph({
+            w: 50,
+            h: 50,
+            l: action.payload.l - store.getState().activeContext.info.l,
+            t: action.payload.t - store.getState().activeContext.info.t,
+            header: "Заголовок",   // newGlyph.header,
+            label:  "",   // newGlyph.label,
+            img:    null  // newGlyph.imgSrc ? {src: newGlyph.imgSrc} : null
+        });
+
         return {
             ...state,
-            [action.payload['link']]:action.payload
+            [newGlyph.link]:newGlyph
         }
     }
 

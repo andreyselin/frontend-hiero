@@ -1,21 +1,9 @@
 import {actionTypes} from '../../const';
-import Glyph from '../../classes/glyph';
 
 export const addGlyph = (newGlyph)=> {
-
-    console.log("img:    newGlyph.imgSrc",newGlyph.imgSrc);
-
     return {
         type: actionTypes.glyph.add,
-        payload: new Glyph({
-            w: 50,
-            h: 50,
-            l: 400,
-            t: 300,
-            header: newGlyph.header,
-            label:  newGlyph.label,
-            img:    newGlyph.imgSrc ? {src: newGlyph.imgSrc} : null
-        })
+        payload: newGlyph
     };
 };
 
