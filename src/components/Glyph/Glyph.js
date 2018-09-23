@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import './Glyph.css';
+import {bindActionCreators} from 'redux';
 import {addConnectionChooseFrom, addConnectionChooseTo} from '../../store/actions/connectionActions';
 import {setGlyphBounds} from '../../store/actions/glyphActions';
+import {showEditGlyphMenuBlock} from '../../store/actions/menuBlocksActions';
 
 class Glyph extends Component {
     constructor (props) {
@@ -14,7 +16,7 @@ class Glyph extends Component {
     }
 
     componentDidMount(){
-        
+
         // Will be used after editing only
         this.props.setGlyphBounds({
             link: this.props.glyph.link,
@@ -24,7 +26,7 @@ class Glyph extends Component {
     }
 
     onDoubleClick() {
-        this.props.setActiveGlyphInContext(this);
+        this.props.showEditGlyphMenuBlock(this.props.glyph);
     }
 
     onMouseDown (event) {
@@ -86,18 +88,13 @@ const mapStateToProps = (state) => {
     return state;
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addConnectionChooseFrom: (link) => {
-            dispatch(addConnectionChooseFrom(link))
-        },
-        addConnectionChooseTo: (link) => {
-            dispatch(addConnectionChooseTo(link))
-        },
-        setGlyphBounds: (glyph) => {
-            dispatch(setGlyphBounds(glyph))
-        }
-    }
+const matchDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    addConnectionChooseFrom: addConnectionChooseFrom,
+    addConnectionChooseTo:   addConnectionChooseTo,
+    setGlyphBounds:          setGlyphBounds,
+    showEditGlyphMenuBlock:  showEditGlyphMenuBlock
+  }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Glyph);
+export default connect(mapStateToProps, matchDispatchToProps)(Glyph);
