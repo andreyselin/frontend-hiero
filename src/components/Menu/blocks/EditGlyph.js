@@ -3,6 +3,20 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {editGlyph} from '../../../store/actions/glyphActions';
 
+
+const formatGlyphToOpen = inputGlyph => ({
+  link:   inputGlyph.link || "",
+  header: inputGlyph.header || "",
+  label:  inputGlyph.label  || "",
+  imgSrc: inputGlyph.img ? inputGlyph.img.src : "",
+});
+
+const formatGlyphToSave = outputGlyph => ({
+  header: outputGlyph.header || null,
+  label:  outputGlyph.label  || null,
+  img:    outputGlyph.imgSrc ? {src: outputGlyph.imgSrc} : null,
+});
+
 class MenuBlockEditGlyph extends Component {
     constructor(props) {
         super(props);
@@ -14,18 +28,15 @@ class MenuBlockEditGlyph extends Component {
     }
 
     editGlyph () {
-      let glyphToSave = {
-        w: 100,
-        header: this.state.header,
-        label: this.state.label,
-        img: this.state.imgSrc ? {src: this.state.imgSrc} : null, // Handle img size later
-      };
-      this.props.editGlyph(this.state.link, glyphToSave);
+      this.props.editGlyph(this.state.link, formatGlyphToSave(this.state));
     }
 
     componentWillMount () {
       this.setState(this.props.glyphToEdit);
-      console.log("this.state.1", this.state);
+    }
+
+    componentWillReceiveProps (nextProps) {
+      this.setState(formatGlyphToOpen(nextProps.glyphToEdit));
     }
 
     render () {
@@ -42,6 +53,7 @@ class MenuBlockEditGlyph extends Component {
                         placeholder="Image source"
                         />
                 </div>
+
                 <div className="Menu_block_row">
                     Header:<br />
                     <input
@@ -51,6 +63,7 @@ class MenuBlockEditGlyph extends Component {
                         placeholder="Header for new glyph"
                         />
                 </div>
+
                 <div className="Menu_block_row">
                     Label:<br />
                     <input
