@@ -4,7 +4,7 @@ import Connection from '../Connection';
 import "./Context.css";
 import {connect} from 'react-redux';
 import classNames from 'classnames';
-import {addGlyph, moveGlyph, removeGlyph, setActiveGlyph} from '../../store/actions/glyphActions';
+import {addGlyph, editGlyph, moveGlyph, removeGlyph, setActiveGlyph} from '../../store/actions/glyphActions';
 import {startPanning, panContext} from '../../store/actions/contextInfoActions';
 import {bindActionCreators} from 'redux';
 import ConnectionMenu from '../ConnectionMenu';
@@ -23,6 +23,7 @@ function mapStateToProps(state) {
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
             addGlyph: addGlyph,
+            editGlyph: editGlyph,
             moveGlyph: moveGlyph,
             removeGlyph: removeGlyph,
             removeConnection: removeConnection,
@@ -59,7 +60,7 @@ class Context extends Component {
         let startCoords = {
             left: glyph.l,
             top:  glyph.t
-        };        
+        };
 
         this.setState({onMouseMove: (e) => {
             let treeShiftX = startCoords.left - e.clientX;
@@ -83,14 +84,14 @@ class Context extends Component {
     onConnectionClick(targetConnection, e) {
         let ConnectionMenu = this.refs.connectionMenu;
         let $this = this;
-        
+
         ConnectionMenu.setState({
             top: e.clientY,
             left: e.clientX,
             display: 'block',
             targetConnection: targetConnection
         });
-        
+
         $this.setState({
             mouseClick: (e) => {
                 if (!e.target.classList.contains('connection-menu__link')) {
@@ -119,7 +120,7 @@ class Context extends Component {
     removeGlyph(glyph) {
         let targetGlyph = glyph.props.glyph.link;
         let removeConnections = findGlyphsConections(targetGlyph, this);
-        
+
         removeConnections.forEach((connection) => {
             this.props.removeConnection(connection.link);
         });
@@ -135,14 +136,7 @@ class Context extends Component {
 
         if (target.classList.contains('context__wrapper')) {
             let contextWrapper = this.refs.contextWrapper;
-
             this.props.startPanning(e);
-            ////  let context = this.refs.context;
-            ////  let left = parseInt(context.style.left, 10) || 0;
-            ////  let top = parseInt(context.style.top, 10) || 0;
-            ////  let shiftX = e.clientX - left;
-            ////  let shiftY = e.clientY - top;
-            
             contextWrapper.classList.add('context__wrapper--grabbing');
 
             this.setState({
@@ -154,12 +148,13 @@ class Context extends Component {
                 onMouseUp: e => {
 
                     // Handling double click
-                    setTimeout(()=>this.state.justClickedCount=0, 300);
+                    setTimeout(()=>this.setState({justClickedCount: 0}), 300);
                     if (++this.state.justClickedCount === 2) {
-                        this.props.addGlyph({
+                        let createdGlyph = this.props.addGlyph({
                             l: e.clientX,
                             t: e.clientY
                         });
+                        this.props.editGlyph(createdGlyph);
                     }
 
                     contextWrapper.classList.remove('context__wrapper--grabbing');

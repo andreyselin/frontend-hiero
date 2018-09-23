@@ -1,9 +1,12 @@
-import {actionTypes} from '../../const';
+import {actionTypes, menuBlocks} from '../../const';
 
-export const showMenuBlock = name => {
+export const showMenuBlock = (name, data) => {
     return {
         type: actionTypes.menuBlocks.show,
-        payload: {name: name} // Extendable
+        payload: {
+            name: name,
+            data: data
+        }
     };
 };
 
@@ -21,6 +24,22 @@ export const toggleMenuBlock = name => {
     };
 };
 
+
+        ///////////////////////
+        //                   //
+        //  Specific below,  //
+        //  some unifying    //
+        //  required         //
+        //                   //
+        ///////////////////////
+
+
+
+export const showEditGlyphMenuBlock = theGlyph => showMenuBlock (menuBlocks.editGlyph, theGlyph);
+
+// This if for async filling already opened menu block,
+// should be refactored via setTimeout in reducer
+// Can be made via updateMenuBlock action
 export const showContextsToOpen = list => {
     return {
         type: actionTypes.menuBlocks.showContextsToOpen,

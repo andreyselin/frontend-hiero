@@ -21,12 +21,24 @@ const contextService = {
          axios.get('http://5.101.127.18:5000/contexts/open', {params: {id:openParams.contextId}})
             .then (response => {
 
-                // response.data.content.info = {
-                //     id: response.data.id,
-                //     title: response.data.title
-                // };
+              let theContext = response.data.content;
 
-                contexts.push(response.data.content);
+                // Handling old version contexts
+                if (!theContext.info) {
+                  console.log("Check if it is used anywhere - 23 Sept. 2018");
+                  theContext.info = {
+                    id: response.data.id,
+                    title: response.data.title,
+                    t: 0,
+                    l: 0
+                  }
+                } else {
+                  theContext.info.t = theContext.info.t || 0;
+                  theContext.info.l = theContext.info.l || 0;
+                }
+
+                // Not used yet
+                contexts.push(theContext);
 
                 // Handling navigation stuff here - first use only one navigator [0] to simplify
                 store.dispatch (assignNavigatorAContext ({
@@ -34,7 +46,7 @@ const contextService = {
                     navigatorIndex: 0
                 }));
 
-                openContextActionWrapper(response.data.content);
+                openContextActionWrapper(theContext);
 
                 resolve ();
             });

@@ -1,7 +1,6 @@
 export const menuBlocks = {
-    addGlyph:      "addGlyph",
+    editGlyph:     "editGlyph",
     addConnection: "addConnection",
-    editGlyph:     "addGlyph",
     openContext:   "openContext"
 };
 
@@ -44,7 +43,8 @@ export const actionTypes = {
         moveTree:  "GLYPH_MOVE_TREE",
         updateAll: "GLYPH_UPDATE_ALL",
         setActive: "GLYPH_SET_ACTIVE",
-        editStyle: "GLYPH_EDIT_STYLE"
+        editStyle: "GLYPH_EDIT_STYLE",
+        edit:      "GLYPH_EDIT"
     },
     connection: {
         add:{

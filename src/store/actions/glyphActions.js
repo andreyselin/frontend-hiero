@@ -1,10 +1,10 @@
 import {actionTypes} from '../../const';
 
-export const addGlyph = (newGlyph)=> {
-    return {
-        type: actionTypes.glyph.add,
-        payload: newGlyph
-    };
+export const addGlyph = params=> {
+  return {
+      type: actionTypes.glyph.add,
+      payload: params
+  };
 };
 
 
@@ -58,6 +58,13 @@ export const editGlyphStyle = (glyph, style) => {
             glyph,
             style
         }
+    }
+};
+
+export const editGlyph = (link, glyph) => {
+    return {
+        type: actionTypes.glyph.edit,
+        payload: {link, glyph}
     }
 };
 

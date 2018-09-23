@@ -12,7 +12,7 @@ import {removeGlyph, editGlyphStyle}      from '../../store/actions/glyphActions
 import {findGlyphsConections} from '../Context/contextFuncs';
 
 import MenuBlockContextInfo   from './blocks/ContextInfo';
-import MenuBlockAddGlyph      from './blocks/AddGlyph';
+import MenuBlockEditGlyph     from './blocks/EditGlyph';
 import MenuBlockOpenContext   from './blocks/OpenContext';
 import MenuBlockAddConnection from './blocks/AddConnection';
 
@@ -123,12 +123,14 @@ class Menu extends Component {
                     <MenuBlockContextInfo />
 
                     <div className="Menu_block">
+                        {/*
                         <img
                             className="Menu_icon"
                             alt="Add glyph"
                             title="Add glyph"
                             src={iconAddGlyph}
-                            onClick={()=>this.props.toggleMenuBlock(menuBlocks.addGlyph)} />
+                            onClick={()=>this.props.toggleMenuBlock(menuBlocks.editGlyph)} />
+                        */}
                         <img
                             className="Menu_icon"
                             alt="Add connection"
@@ -137,7 +139,7 @@ class Menu extends Component {
                             onClick={this.addConnection} />
                     </div>
 
-                    {this.props.menuBlocks.addGlyph.show && <MenuBlockAddGlyph />}
+                    {this.props.menuBlocks.editGlyph.show && <MenuBlockEditGlyph />}
                     {this.props.addConnection.mode===addConnectionModes.connectionModeOn && <MenuBlockAddConnection />}
 
                     {
@@ -148,13 +150,6 @@ class Menu extends Component {
                         </div>
                     </div>
                     }
-
-                    <div className="Menu_block">
-                        <GlyphMenu activeGlyph={this.props.activeGlyph}
-                                   removeGlyph={this.removeGlyph}
-                                   editGlyphImgPosition={this.editGlyphImgPosition}
-                                   />
-                    </div>
                 </div>
             </div>
         );

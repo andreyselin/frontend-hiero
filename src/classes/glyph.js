@@ -2,8 +2,6 @@ import checkParams from './checkParams';
 
 export default function Glyph (params){
 
-    console.log("params", params);
-
     // Checking required params were passed
     let glyphParamsOk = checkParams({
             w:      {type: "number", required: false  },

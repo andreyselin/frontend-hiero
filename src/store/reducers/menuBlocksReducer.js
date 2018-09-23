@@ -1,7 +1,6 @@
 import {actionTypes, menuBlocks} from '../../const';
 
 var initialState={
-    [menuBlocks.addGlyph]:     {show:false},
     [menuBlocks.addConnection]:{show:false}, // Not used due to using more complex addConnectionReducer
     [menuBlocks.editGlyph]:    {show:false},
     [menuBlocks.openContext]:  {show:false, list: null}
@@ -10,9 +9,13 @@ var initialState={
 export default function menuBlocksReducer(state = initialState, action) {
 
     if (action.type === actionTypes.menuBlocks.show) {
+
+        // Specific handling depending on menuBlock name
+        // can be performed here when it is required
+
         return {
             ...state,
-            [action.payload.name]: {...state[action.payload.name], show: true}
+            [action.payload.name]: {...action.payload.data, show: true}
         };
     }
 
@@ -24,6 +27,7 @@ export default function menuBlocksReducer(state = initialState, action) {
     }
 
     else if (action.type === actionTypes.menuBlocks.toggle){
+        // Data can be optional here
         return {
             ...state,
             [action.payload.name]: {...state[action.payload.name], show: !state[action.payload.name].show}
