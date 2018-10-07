@@ -22,26 +22,38 @@
 }
 .Glyph.__horizontal .GlyphContent {
     text-align: left;
+    margin-left: 20px;
 }
+
+
+
 
 .Glyph.__horizontal__reversed {
     flex-direction: row-reverse;
 }
 .Glyph.__horizontal__reversed .GlyphContent {
+    margin-right: 20px;
     text-align: right;
 }
+
+
+
 
 .Glyph.__vertical {
     flex-direction: column;
 }
 .Glyph.__vertical .GlyphContent {
+    margin-top: 15px;
     text-align: center;
 }
+
+
 
 .Glyph.__vertical__reversed {
     flex-direction: column-reverse;
 }
 .Glyph.__vertical__reversed .GlyphContent {
+    margin-bottom: 15px;
     text-align: center;
 }
 
@@ -53,7 +65,10 @@
 
 .GlyphHeader {
     font-size: 18px;
-    padding: 10px;
+}
+
+.GlyphLabel {
+    margin: 5px 0;
 }
 
 /*

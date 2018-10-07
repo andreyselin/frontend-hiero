@@ -76,7 +76,7 @@ class Glyph extends Component {
                 <div className='GlyphContent'>
                     <div className='GlyphHeader'>{this.props.glyph.header}</div>
                     {this.props.glyph.label && (
-                        <span className='GlyphSpan'>{this.props.glyph.label}</span>
+                        <div className='GlyphLabel'>{this.props.glyph.label}</div>
                     )}
                 </div>
             </div>

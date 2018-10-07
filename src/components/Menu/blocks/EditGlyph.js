@@ -115,10 +115,10 @@ class MenuBlockEditGlyph extends Component {
                 </div>
 
                 <div className="Menu_block_row">
-                    Glyph alignment:<br />
+                    Image position:<br />
 
-                    <button onClick={() => this.setAlignmentClass (0)}>&rarr;</button>
-                    <button onClick={() => this.setAlignmentClass (1)}>&larr;</button>
+                    <button onClick={() => this.setAlignmentClass (0)}>&larr;</button>
+                    <button onClick={() => this.setAlignmentClass (1)}>&rarr;</button>
                     <button onClick={() => this.setAlignmentClass (2)}>&uarr;</button>
                     <button onClick={() => this.setAlignmentClass (3)}>&darr;</button>
                 </div>
