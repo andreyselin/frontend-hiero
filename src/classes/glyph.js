@@ -4,14 +4,15 @@ export default function Glyph (params){
 
     // Checking required params were passed
     let glyphParamsOk = checkParams({
-            w:      {type: "number", required: false  },
-            h:      {type: "number", required: false  },
-            l:      {type: "number", required: true   },
-            t:      {type: "number", required: true   },
-            header: {type: "string", required: true   },
-            label:  {type: "string", required: false  },
-            img:    {type: "object", required: false  },
-            action: {type: "object", required: false  }
+            w:          {type: "number", required: false  },
+            h:          {type: "number", required: false  },
+            l:          {type: "number", required: true   },
+            t:          {type: "number", required: true   },
+            header:     {type: "string", required: true   },
+            label:      {type: "string", required: false  },
+            img:        {type: "object", required: false  },
+            action:     {type: "object", required: false  },
+            classNames: {type: "array",  required: false  }
         }, params),
 
         imgParamsOk =

@@ -7,7 +7,7 @@ import {createContextActionWrapper} from "../../store/actions/contextActionWrapp
 import {addConnectionToggle,
         removeConnection}     from '../../store/actions/connectionActions';
 import {toggleMenuBlock}  from '../../store/actions/menuBlocksActions';
-import {removeGlyph, editGlyphStyle}      from '../../store/actions/glyphActions';
+import {removeGlyph}      from '../../store/actions/glyphActions';
 
 import {findGlyphsConections} from '../Context/contextFuncs';
 
@@ -42,8 +42,7 @@ function matchDispatchToProps(dispatch) {
             toggleMenuBlock:     toggleMenuBlock,
             addConnectionToggle: addConnectionToggle,
             removeGlyph:         removeGlyph,
-            removeConnection:    removeConnection,
-            editGlyphStyle:      editGlyphStyle
+            removeConnection:    removeConnection
         },
         dispatch
     );
@@ -55,7 +54,6 @@ class Menu extends Component {
         this.addConnection = this.addConnection.bind(this);
         this.removeGlyph = this.removeGlyph.bind(this);
         this.createContext = this.createContext.bind(this);
-        this.editGlyphImgPosition = this.editGlyphImgPosition.bind(this);
     }
 
     addConnection() {
@@ -70,9 +68,12 @@ class Menu extends Component {
         contextService.save(store.getState().activeContext);
     }
 
-    editGlyphImgPosition(activeGlyph, style) {
-        this.props.editGlyphStyle(activeGlyph.props.glyph.link, style);
-    }
+    // This is pending to be deleted,
+    // just waiting to find where is it called from
+    // if it hasnt been already deleted
+    // editGlyphImgPosition(activeGlyph, style) {
+    //     this.props.editGlyphStyle(activeGlyph.props.glyph.link, style);
+    // }
 
     removeGlyph(activeGlyph) {
         let targetGlyph = activeGlyph.props.glyph.link;

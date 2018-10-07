@@ -37,7 +37,6 @@ export default function glyphs(state = {}, action) {
 
 
     else if (action.type === actionTypes.glyph.move) {
-
         return {
             ...state,
             [action.payload.link]:{
@@ -74,22 +73,8 @@ export default function glyphs(state = {}, action) {
     }
 
 
-    else if  (action.type === actionTypes.glyph.editStyle) {
-        return {
-            ...state,
-            [action.payload.glyph]:{
-                ...state[action.payload.glyph],
-                style: action.payload.style
-            }
-        }
-    }
-
-
     // This SAVES the glyph when user pushed save button
     else if  (action.type === actionTypes.glyph.edit) {
-
-      // console.log(action.payload.link, action.payload.glyph, state[action.payload.link])
-      console.log(action.payload, "\n\n\n", state[action.payload.link]);
 
         return {
             ...state,

@@ -50,18 +50,8 @@ export const clearAllGlyphs = () => {
     }
 };
 
-// Todo:check
-export const editGlyphStyle = (glyph, style) => {
-    return {
-        type: actionTypes.glyph.editStyle,
-        payload: {
-            glyph,
-            style
-        }
-    }
-};
-
 export const editGlyph = (link, glyph) => {
+    console.log("edit action", glyph);
     return {
         type: actionTypes.glyph.edit,
         payload: {link, glyph}

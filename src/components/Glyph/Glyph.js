@@ -52,14 +52,14 @@ class Glyph extends Component {
                 className={classNames(
                     "Glyph",
                     "noselect",
-                    this.props.glyph.style
+                    [this.props.glyph.classNames]
                 )}
 
                  style={{
-                    // width:      this.state.w,
-                    // height:     this.state.h,
-                    top:        this.props.glyph.t,
-                    left:       this.props.glyph.l
+                    width:  this.props.glyph.w,
+                    height: this.props.glyph.h,
+                    top:    this.props.glyph.t,
+                    left:   this.props.glyph.l
                  }}
                  onMouseDown = {this.onMouseDown}
                  onMouseUp = {this.onMouseUp}

@@ -13,24 +13,41 @@
 
 }
 
-.GlyphHorizontal {
+
+/*  -   -   -   -   -   -   -   -   -   -   -   -   */
+
+
+.Glyph.__horizontal {
     flex-direction: row;
 }
-.GlyphHorizontal--reverse {
-    flex-direction: row-reverse;
-}
-.GlyphHorizontal--column{
-    flex-direction: column;
-}
-.GlyphHorizontal--column-reverse{
-    flex-direction: column-reverse;
-}
-.GlyphHorizontal .GlyphImg {
-    margin-right: 0.5rem;
-}
-.GlyphHorizontal .GlyphContent {
+.Glyph.__horizontal .GlyphContent {
     text-align: left;
 }
+
+.Glyph.__horizontal__reversed {
+    flex-direction: row-reverse;
+}
+.Glyph.__horizontal__reversed .GlyphContent {
+    text-align: right;
+}
+
+.Glyph.__vertical {
+    flex-direction: column;
+}
+.Glyph.__vertical .GlyphContent {
+    text-align: center;
+}
+
+.Glyph.__vertical__reversed {
+    flex-direction: column-reverse;
+}
+.Glyph.__vertical__reversed .GlyphContent {
+    text-align: center;
+}
+
+
+/*  -   -   -   -   -   -   -   -   -   -   -   -   */
+
 
 .GlyphImg {}
 
